@@ -31,7 +31,7 @@ Generate a concise changelog entry after documentation review is approved.
 
 1. Confirm review pass status.
 2. Extract relevant end-user/maintainer impact from `docTarget` and
-  `changeSummary`.
+   `changeSummary`.
 3. Write/update a changelog entry in `changelogTarget`.
 4. Keep wording stable and easy to scan.
 
@@ -41,9 +41,9 @@ Generate a concise changelog entry after documentation review is approved.
 
 ### Review gate
 
-- Entry reflects approved documentation.
-- Entry is concise and understandable without source diff.
-- No unsupported claims.
+- [ ] Entry reflects approved documentation.
+- [ ] Entry is concise and understandable without source diff.
+- [ ] No unsupported claims.
 
 ### References
 
