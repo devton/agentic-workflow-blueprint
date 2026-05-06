@@ -1,13 +1,8 @@
----
-name: workflow-blueprint
-description: Blueprint workflow to scaffold agent-oriented documentation with progressive disclosure and executable contracts.
----
-
 ## agentic-workflows.blueprint
 
 ### Goal
 
-Provide a reusable blueprint workflow that scaffolds an "agentic workflows" documentation structure for any codebase, with progressive disclosure and executable contracts (workflows).
+Provide a reusable blueprint workflow that scaffolds an “agentic workflows” documentation structure for any codebase, with progressive disclosure and executable contracts (workflows).
 
 ### Scope
 
@@ -16,10 +11,10 @@ Provide a reusable blueprint workflow that scaffolds an "agentic workflows" docu
 
 ### Triggers
 
-- "Create agentic workflow structure"
-- "Set up skills folder + workflows"
-- "Make docs agent-friendly"
-- "Refactor AGENTS.md into linked skills"
+- “Create agentic workflow structure”
+- “Set up skills folder + workflows”
+- “Make docs agent-friendly”
+- “Refactor AGENTS.md into linked skills”
 
 ### Inputs
 
@@ -28,7 +23,7 @@ Provide a reusable blueprint workflow that scaffolds an "agentic workflows" docu
 - `techStack`: short list (e.g. `NestJS + MikroORM + Graphile Worker`)
 - `existingRootDoc`: root instruction file path (`AGENTS.md`, `CLAUDE.md`, etc.)
 - `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`)
-- `constraints`: project hard rules (e.g. "no emojis", "mock external boundaries only")
+- `constraints`: project hard rules (e.g. “no emojis”, “mock external boundaries only”)
 
 ### Outputs
 
@@ -75,7 +70,7 @@ execution playbooks for those workflows.
 Create `skills/<projectSlug>/SKILL.md` as the global entrypoint:
 
 - A short description of what the skill is for.
-- An "orchestrator" section that explains:
+- An “orchestrator” section that explains:
   - how to classify a task
   - how to select one workflow
   - how to close (validation gate if applicable)
@@ -104,7 +99,7 @@ For each workflow in `workflowsWanted`, create:
 - `Scope`: applies/does not cover
 - `Triggers`: file triggers + intent triggers
 - `Inputs`: baseBranch, diff scope, required config
-- `Invariants`: the project's hard rules + workflow-specific rules
+- `Invariants`: the project’s hard rules + workflow-specific rules
 - `Procedure`: deterministic steps (evidence-driven; use git diff when documenting)
 - `Outputs`: what files/notes/checkpoints must be produced
 - `Review gate`: checklist with pass/fail criteria
@@ -114,8 +109,8 @@ For each workflow in `workflowsWanted`, create:
 
 Update `existingRootDoc` to include:
 
-- "Start here": link to `skills/<projectSlug>/SKILL.md`
-- Under "Skills" (or similar), list:
+- “Start here”: link to `skills/<projectSlug>/SKILL.md`
+- Under “Skills” (or similar), list:
   - the project skill
   - internal workflow skills (links to the new workflow SKILL.md files)
   - runbook links
@@ -128,7 +123,7 @@ If there are existing skills in other directories:
 
 - Keep the file
 - Add a top banner:
-  - "Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`"
+  - “Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`”
 - Leave the rest as a deep dive reference
 
 #### 6) Consistency verification (required)
@@ -144,10 +139,11 @@ Before declaring the scaffold done:
 
 - Root doc remains minimal and only links out.
 - Each workflow has the full contract sections (Goal..References).
-- Constraints are explicit and testable (no vague "best practices").
+- Constraints are explicit and testable (no vague “best practices”).
 - No duplication between root, project skill, and workflows.
 - All links resolve.
 
 ### Notes
 
 - This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules), keep them in the project skill and link them from workflows.
+
