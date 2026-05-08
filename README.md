@@ -1,69 +1,124 @@
 # Agentic Workflows Blueprint
 
-This folder provides a reusable blueprint to scaffold an agent-oriented
-documentation/workflow structure in any repository.
+A meta-skill that teaches your AI agent how to build operational skills
+for each module and system in your project — so it loads only the context
+it needs, when it needs it.
 
-## Blueprint vision
+Instead of one massive `AGENTS.md`, your agent gets a routing system:
+it classifies the task, loads the right skill, executes deterministically,
+and hands off to the next step. Less tokens, more precision.
+
+---
+
+## The problem it solves
+
+You have a project with multiple modules. Your AI agent loads everything
+every time — all rules, all context, all history. That burns tokens and
+dilutes focus.
+
+This blueprint lets the agent build **scoped skills per module**, each
+with its own contract, inputs, outputs, and review gates. The agent
+only loads what's relevant to the current task.
+
+---
+
+## How it works in practice
+
+**Without this blueprint:**
+You tell your agent "add a payment module". It loads your entire
+AGENTS.md (500+ lines), guesses conventions, and wings it.
+
+**With this blueprint:**
+
+1. You trigger this skill once: *"set up my project"* — it asks a few
+   questions and scaffolds `skills/<project>/` with routing, contracts,
+   and workflows.
+2. Next time you say *"add a payment module"*, the agent classifies the
+   task → loads only `skills/<project>/workflows/modules/SKILL.md`
+   → follows the deterministic procedure → passes the review gate
+   → hands off.
+3. You adjust any workflow in plain conversation — it's just markdown
+   the agent reads and follows.
+
+---
+
+## Why this saves tokens
+
+- **Scoped loading** — agent loads only the skill for the current step,
+  not the whole project context.
+- **Bounded contracts** — clear inputs, outputs, and pass/fail gates
+  keep the agent deterministic.
+- **Focused retries** — when something fails, the agent retries only
+  the failed gate, not the entire conversation.
+- **Structured handoffs** — steps communicate via defined inputs/outputs,
+  not free-form context dumps.
 
 ```mermaid
 flowchart TD
-    A[Entry Skill Orchestrator] --> B["Execution chain<br/>Workflow 1 -> Workflow 2 -> Workflow 3 -> Runbook / Delivery"]
+    A[Entry Skill: Orchestrator] --> B["Execution chain<br/>Workflow 1 → Workflow 2 → Workflow 3 → Delivery"]
 
-    B -. loads only current contract per step .-> C[Context Slice 1]
-    B -. loads only current contract per step .-> D[Context Slice 2]
-    B -. loads only current contract per step .-> E[Context Slice 3]
+    B -. "loads only current contract" .-> C[Context Slice 1]
+    B -. "loads only current contract" .-> D[Context Slice 2]
+    B -. "loads only current contract" .-> E[Context Slice 3]
 
     C --> F[Compact handoff to next step]
     D --> F
     E --> F
 ```
 
+---
 
+## Getting started
 
-## What to customize first
+When you trigger this blueprint, the agent will ask:
 
-- `projectSlug`: the target repository name.
-- `baseBranch`: integration branch (`main`, `develop`, etc.).
-- `techStack`: short stack description.
-- `constraints`: hard rules that cannot be violated.
-- `workflowsWanted`: the workflow ids you want to scaffold.
+- **projectSlug** — short name for the repo (e.g. `my-backend`)
+- **baseBranch** — main integration branch (e.g. `main`, `develop`)
+- **techStack** — what's the stack? (e.g. `NestJS + PostgreSQL + Redis`)
+- **workflowsWanted** — which workflows to scaffold
+  (e.g. `modules`, `specs`, `document`, `review`)
+- **constraints** — hard rules
+  (e.g. "no ORM, raw SQL only", "all API calls go through service layer")
 
-## How to use
+Then it generates the full structure and wires everything into your
+`AGENTS.md` or `CLAUDE.md` — no manual wiring needed.
 
-1. Read `SKILL.md` to understand the required contract format.
-2. Create the project entry skill (`skills/<projectSlug>/SKILL.md`).
-3. Create references (`routing-matrix.md`, `role-contracts.md`).
-4. Create workflows under `skills/<projectSlug>/workflows/`.
-5. Link everything from the root instruction file (`AGENTS.md`, etc.).
-6. Verify all links and workflow ids.
+### What gets generated
 
-## Included example workflows
+```
+skills/<projectSlug>/
+  SKILL.md                          ← Orchestrator (entry point)
+  reference/
+    routing-matrix.md               ← Task → workflow mapping
+    role-contracts.md               ← Roles, boundaries, handoffs
+    hook-blueprint.md               ← Optional automation hooks
+  workflows/
+    <workflowName>/SKILL.md         ← One per workflow
 
-This blueprint includes a direct Linear workflow example plus additional
-composable examples under `workflows/`:
+docs/runbooks/
+  agent-role-system.md              ← Operator-facing playbooks
+  agent-role-hooks.md               ← Optional hook runbook
+```
 
-- `document`: builds/update docs from the implementation diff.
-- `review`: validates document output and returns pass/fail feedback.
-- `changelog`: writes a concise changelog entry after review passes.
-- `linear`: concrete MCP workflow example for Linear integration.
-- `mcp-linear-planner` (optional): validates MCP readiness and plans Linear actions.
-- `mcp-linear-sync` (optional): executes synchronized updates from intake plan.
+---
 
-## Example chained flow (document -> review -> changelog)
+## Included workflow examples
 
-Use this flow to demonstrate orchestration behavior:
+These are **templates** — copy, rename, and adapt to your project's
+actual workflows (deploy, test, migrate, etc).
 
-1. Run `document`.
-2. Run `review`.
-3. If `review` fails:
-  - rerun `document` with review feedback;
-  - rerun `review`;
-  - repeat up to 3 attempts total.
-4. If review passes, run `changelog`.
+| Workflow | What it does | When to use |
+|----------|-------------|-------------|
+| `document` | Builds docs from git diff evidence | After implementation is done |
+| `review` | Validates docs with deterministic pass/fail | Auto-step after `document` |
+| `changelog` | Generates changelog from approved docs | After `review` passes |
+| `linear` | Creates Linear projects/issues via MCP | Multi-PR initiatives |
+| `mcp-linear-planner` | Preflight check + execution plan for Linear | When you need stricter control |
+| `mcp-linear-sync` | Executes planned Linear operations | After `planner` validates |
 
-Pseudo-flow:
+### Chained flow example (document → review → changelog)
 
-```text
+```
 attempt = 1
 while attempt <= 3:
   doc = run(document)
@@ -74,68 +129,56 @@ while attempt <= 3:
   attempt += 1
 ```
 
-## Goal of these examples
+1. `document` produces docs from implementation evidence.
+2. `review` validates against the evidence.
+3. If fail → feed findings back to `document`, retry (max 3).
+4. If pass → `changelog` generates the entry.
 
-The objective here is to show a practical, composable workflow pattern. Teams
-can keep this blueprint as reference and adjust naming, files, and gates to
-their own project standards.
+---
 
-## Why contracts improve token efficiency
+## The contract format
 
-Contracts keep each workflow explicit and bounded (`Goal`, `Inputs`,
-`Invariants`, `Procedure`, `Outputs`, `Review gate`). This improves token
-efficiency because:
+Every workflow is an executable contract the agent follows:
 
-- the agent loads only the instructions relevant to the current step;
-- execution avoids broad, repeated reasoning over unrelated rules;
-- handoffs become structured (inputs/outputs) instead of free-form context;
-- retries focus only on failed gates, not on the entire flow.
-
-In practice, this reduces prompt bloat and makes runs more deterministic.
-
-```mermaid
-flowchart TD
-    A[Global docs and history] --> B[Workflow step N]
-    B --> C{Contract gate}
-    C -->|pass| D[Emit structured outputs]
-    C -->|fail| E[Retry only failed step]
-    D --> F[Next workflow step N+1]
-
-    G[Inputs: minimal required] --> B
-    H[Outputs: compact handoff] --> F
-
-    I[Token savings]
-    I --> I1[No full-history reload]
-    I --> I2[No unrelated rules in prompt]
-    I --> I3[Focused retries]
+```
+Goal        → 1 sentence: what this workflow does
+Scope       → applies to / does not cover
+Triggers    → file patterns + intent phrases
+Inputs      → what the workflow needs
+Invariants  → hard rules that cannot be violated
+Procedure   → deterministic steps (evidence-driven)
+Outputs     → what must be produced
+Review gate → pass/fail checklist
+References  → links to parent skill and related workflows
 ```
 
+This format keeps each workflow self-contained, linkable, and bounded.
+Agents don't need to reason over the entire project — they follow the
+contract for the current step.
 
+---
 
-## MCP integration example (Linear)
+## Included runbooks
 
-Use `linear` as the default MCP example in this blueprint. It mirrors the
-canonical project workflow style used in this repository:
+Runbooks are operator-facing execution playbooks (for humans managing
+agent runs). Workflow SKILL files are agent-facing contract definitions.
 
-Recommended usage:
+- **`document-review-changelog.md`** — operational guide for the 3-step
+  doc loop with retry logic.
+- **`linear-mcp.md`** — operational guide for direct Linear workflow.
+- **`mcp-linear-sync.md`** — operational guide for the planner → sync
+  decomposition.
 
-1. Run `linear` to manage project/milestone/issue operations in Linear.
-2. If you need stricter orchestration, split `linear` into:
-  - `mcp-linear-planner` (preflight and plan),
-  - `mcp-linear-sync` (execution and report).
+---
 
-This models both levels:
+## How to use this repo
 
-- simple and direct (`linear`);
-- decomposed and highly controlled (`planner -> sync`).
+1. Read `SKILL.md` for the full blueprint procedure.
+2. Trigger the skill in your agent with your project details.
+3. The agent scaffolds the structure and wires it into your root doc.
+4. Adjust workflows as needed — it's markdown, edit in conversation.
+5. Add new workflows over time by following the contract format.
 
-## Included example runbooks
-
-This blueprint also includes runbooks under `runbooks/`:
-
-- `document-review-changelog.md`: operational guide for the 3-step doc loop.
-- `linear-mcp.md`: operational guide for direct Linear workflow usage.
-- `mcp-linear-sync.md`: operational guide for Linear preflight + sync split.
-
-Use runbooks as execution playbooks (operator-facing), while workflow SKILL
-files remain contract definitions (agent-facing).
+Stack-agnostic by design. Stack-specific rules (ORM patterns, testing
+conventions, deployment quirks) go in the project skill and get linked
+from individual workflows.
