@@ -10,6 +10,24 @@ and hands off to the next step. Less tokens, more precision.
 
 ---
 
+## Quick run
+
+```bash
+npx skills add devton/agentic-workflow-blueprint
+```
+
+Then call the agent in your target repository with a direct prompt like:
+
+```text
+Use workflow-blueprint to scaffold the main project skill from my AGENTS.md.
+Create the project entrypoint at skills/<projectSlug>/SKILL.md and wire the required workflows and references.
+```
+
+After that, wait for the agent to finish the scaffold. The expected first
+deliverable is the main project skill file at `skills/<projectSlug>/SKILL.md`.
+
+---
+
 ## The problem it solves
 
 You have a project with multiple modules. Your AI agent loads everything
@@ -52,6 +70,10 @@ AGENTS.md (500+ lines), guesses conventions, and wings it.
   the failed gate, not the entire conversation.
 - **Structured handoffs** — steps communicate via defined inputs/outputs,
   not free-form context dumps.
+
+---
+
+## Blueprint vision
 
 ```mermaid
 flowchart TD
