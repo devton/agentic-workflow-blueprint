@@ -19,8 +19,7 @@ npx skills add devton/agentic-workflow-blueprint
 Then call the agent in your target repository with a direct prompt like:
 
 ```text
-Use workflow-blueprint to scaffold the main project skill from my AGENTS.md.
-Create the project entrypoint at skills/<projectSlug>/SKILL.md and wire the required workflows and references.
+blueprint this project.
 ```
 
 After that, wait for the agent to finish the scaffold. The expected first
