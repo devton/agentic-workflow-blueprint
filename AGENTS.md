@@ -2,7 +2,7 @@
 
 ### Goal
 
-Provide a reusable blueprint workflow that scaffolds an “agentic workflows” documentation structure for any codebase, with progressive disclosure and executable contracts (workflows).
+Provide a reusable blueprint workflow that scaffolds an "agentic workflows" documentation structure for any codebase, with progressive disclosure and executable contracts (workflows).
 
 ### Scope
 
@@ -11,10 +11,10 @@ Provide a reusable blueprint workflow that scaffolds an “agentic workflows” 
 
 ### Triggers
 
-- “Create agentic workflow structure”
-- “Set up skills folder + workflows”
-- “Make docs agent-friendly”
-- “Refactor AGENTS.md into linked skills”
+- "Create agentic workflow structure"
+- "Set up skills folder + workflows"
+- "Make docs agent-friendly"
+- "Refactor AGENTS.md into linked skills"
 
 ### Inputs
 
@@ -22,8 +22,9 @@ Provide a reusable blueprint workflow that scaffolds an “agentic workflows” 
 - `baseBranch`: default integration branch (e.g. `develop`, `main`)
 - `techStack`: short list (e.g. `NestJS + MikroORM + Graphile Worker`)
 - `existingRootDoc`: root instruction file path (`AGENTS.md`, `CLAUDE.md`, etc.)
-- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`)
-- `constraints`: project hard rules (e.g. “no emojis”, “mock external boundaries only”)
+- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`, `plan-to-blueprint`)
+- `constraints`: project hard rules (e.g. "no emojis", "mock external boundaries only")
+- `skillName` (optional): slash-invocation name for the project entry skill; defaults to `projectSlug` (lowercase, hyphens only)
 
 ### Outputs
 
@@ -32,6 +33,7 @@ Creates a minimal, navigable structure:
 ```
 skills/<projectSlug>/
   SKILL.md
+  template.json                     ← Declarative manifest (commands, entry)
   reference/
     routing-matrix.md
     role-contracts.md
@@ -39,17 +41,20 @@ skills/<projectSlug>/
   workflows/
     <workflowName>/
       SKILL.md
+      template.json (optional)      ← Per-workflow manifest when useful
 docs/runbooks/
   agent-role-system.md
   agent-role-hooks.md (optional)
+  plan-to-blueprint.md (when workflow included)
 ```
 
 And updates the root doc (`AGENTS.md` or equivalent) to link to the new entrypoints.
 
 This blueprint folder can also carry example workflows (`document`, `review`,
-`changelog`, `linear`) to demonstrate chained execution and MCP integration
-patterns. Optional decomposition workflows (such as `mcp-linear-planner` and
-`mcp-linear-sync`) can be added when needed.
+`changelog`, `linear`, `plan-to-blueprint`) to demonstrate chained execution,
+plan-to-skill transformation, and MCP integration patterns. Optional
+decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`)
+can be added when needed.
 
 It can also carry runbook examples under `runbooks/` to show operator-facing
 execution playbooks for those workflows.
@@ -62,6 +67,9 @@ execution playbooks for those workflows.
 - No duplication: do not copy/paste long rules across files; link to the source of truth.
 - Consistency: workflow ids and file paths must match exactly across all references.
 - Minimal surface: only add the workflows actually requested.
+- Source of truth: `SKILL.md` is authoritative; `template.json` is a complementary declarative layer for agents/tools that expose command interfaces.
+- Command routing: router-only — users invoke `/<skillName> <cmd>`; the entry skill resolves `cmd` to `workflows/<cmd>/SKILL.md` and loads only that contract.
+- Manifest sync: every command in `template.json` must map to an existing workflow folder and match `routing-matrix.md`.
 
 ### Procedure
 
@@ -70,19 +78,45 @@ execution playbooks for those workflows.
 Create `skills/<projectSlug>/SKILL.md` as the global entrypoint:
 
 - A short description of what the skill is for.
-- An “orchestrator” section that explains:
+- An "orchestrator" section that explains:
   - how to classify a task
   - how to select one workflow
   - how to close (validation gate if applicable)
+- A **Command routing** section (router-only):
+  - invocation pattern: `/<skillName> <cmd>` (e.g. `/my-backend document`)
+  - map each `cmd` in `workflowsWanted` to `workflows/<cmd>/SKILL.md`
+  - if the agent does not parse subcommands, read `cmd` from the user message and load the mapped workflow contract
+  - do not create flat alias skills unless explicitly requested
 - A list of internal workflow helpers:
   - `workflows/<name>/SKILL.md` links
 - Project constraints and hard rules (short bullets).
+
+Create `skills/<projectSlug>/template.json` as the declarative manifest:
+
+```json
+{
+  "name": "<skillName>",
+  "version": "1.0.0",
+  "entry": "SKILL.md",
+  "routing": "router-only",
+  "commands": [
+    {
+      "name": "<workflowName>",
+      "description": "Short trigger description",
+      "skill": "workflows/<workflowName>/SKILL.md"
+    }
+  ]
+}
+```
+
+- Include one `commands[]` entry per item in `workflowsWanted`.
+- Keep `name` aligned with `skillName` (folder may remain `projectSlug`).
 
 #### 2) Create references (progressive disclosure)
 
 In `skills/<projectSlug>/reference/`, create:
 
-- `routing-matrix.md`: task category -> workflow mapping.
+- `routing-matrix.md`: task category -> workflow mapping; include slash form `/<skillName> <cmd>` alongside intent triggers.
 - `role-contracts.md`: roles, boundaries, handoffs.
 - Optional `hook-blueprint.md`: opt-in automation checklist.
 
@@ -99,18 +133,20 @@ For each workflow in `workflowsWanted`, create:
 - `Scope`: applies/does not cover
 - `Triggers`: file triggers + intent triggers
 - `Inputs`: baseBranch, diff scope, required config
-- `Invariants`: the project’s hard rules + workflow-specific rules
+- `Invariants`: the project's hard rules + workflow-specific rules
 - `Procedure`: deterministic steps (evidence-driven; use git diff when documenting)
 - `Outputs`: what files/notes/checkpoints must be produced
 - `Review gate`: checklist with pass/fail criteria
 - `References`: links back to `skills/<projectSlug>/SKILL.md` and any deep dives
 
+Optionally, for each workflow, add `workflows/<workflowName>/template.json` when an external tool needs a standalone command descriptor; keep it minimal (`name`, `entry`, `parent`).
+
 #### 4) Wire everything into the root doc
 
 Update `existingRootDoc` to include:
 
-- “Start here”: link to `skills/<projectSlug>/SKILL.md`
-- Under “Skills” (or similar), list:
+- "Start here": link to `skills/<projectSlug>/SKILL.md`
+- Under "Skills" (or similar), list:
   - the project skill
   - internal workflow skills (links to the new workflow SKILL.md files)
   - runbook links
@@ -123,7 +159,7 @@ If there are existing skills in other directories:
 
 - Keep the file
 - Add a top banner:
-  - “Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`”
+  - "Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`"
 - Leave the rest as a deep dive reference
 
 #### 6) Consistency verification (required)
@@ -134,16 +170,20 @@ Before declaring the scaffold done:
 - Verify workflow ids are consistent:
   - `projectSlug.workflow.*` matches the file it lives in.
 - Verify root doc points only to canonical locations.
+- Verify `template.json` `commands[].name` values exist under `workflows/` and appear in Command routing + `routing-matrix.md`.
+- Verify router-only behavior is documented in the project entry `SKILL.md` (no undocumented flat aliases).
 
 ### Review gate (must pass)
 
 - Root doc remains minimal and only links out.
 - Each workflow has the full contract sections (Goal..References).
-- Constraints are explicit and testable (no vague “best practices”).
+- Constraints are explicit and testable (no vague "best practices").
 - No duplication between root, project skill, and workflows.
 - All links resolve.
+- `template.json` is valid JSON and consistent with `workflowsWanted`.
+- Command routing resolves every listed subcommand to exactly one workflow contract.
 
 ### Notes
 
 - This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules), keep them in the project skill and link them from workflows.
-
+- Installable skill contract with frontmatter: see `SKILL.md` (`name: workflow-blueprint`).

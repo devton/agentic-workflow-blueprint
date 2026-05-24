@@ -72,6 +72,21 @@ AGENTS.md (500+ lines), guesses conventions, and wings it.
 
 ---
 
+## Why turn plans into skills
+
+Plans are useful in chat, but they are ephemeral. Turning a technical plan into
+skills makes execution repeatable:
+
+- **Persistence** — workflows survive beyond a single session.
+- **Determinism** — contracts replace vague "implement this" instructions.
+- **Verification** — review gates turn plan acceptance criteria into pass/fail checks.
+- **Routing** — the entry skill loads only the workflow needed for the current step.
+
+Use the `plan-to-blueprint` workflow when you already have a plan and want the
+agent to scaffold `skills/<projectSlug>/` with router commands and manifests.
+
+---
+
 ## Blueprint vision
 
 ```mermaid
@@ -109,17 +124,72 @@ Then it generates the full structure and wires everything into your
 ```
 skills/<projectSlug>/
   SKILL.md                          ← Orchestrator (entry point)
+  template.json                     ← Declarative command manifest
   reference/
     routing-matrix.md               ← Task → workflow mapping
     role-contracts.md               ← Roles, boundaries, handoffs
     hook-blueprint.md               ← Optional automation hooks
   workflows/
     <workflowName>/SKILL.md         ← One per workflow
+    <workflowName>/template.json    ← Optional per-workflow manifest
 
 docs/runbooks/
   agent-role-system.md              ← Operator-facing playbooks
   agent-role-hooks.md               ← Optional hook runbook
+  plan-to-blueprint.md              ← Plan → skill scaffold playbook
 ```
+
+### Skill manifest (`template.json`)
+
+`SKILL.md` is the source of truth. `template.json` is a complementary manifest
+for agents and tools that expose a command interface:
+
+```json
+{
+  "name": "my-backend",
+  "version": "1.0.0",
+  "entry": "SKILL.md",
+  "routing": "router-only",
+  "commands": [
+    {
+      "name": "document",
+      "description": "Build docs from implementation evidence",
+      "skill": "workflows/document/SKILL.md"
+    },
+    {
+      "name": "plan-to-blueprint",
+      "description": "Turn a technical plan into executable project skills",
+      "skill": "workflows/plan-to-blueprint/SKILL.md"
+    }
+  ]
+}
+```
+
+Keep `commands[].name` aligned with workflow folder names and with the Command
+routing section in the entry `SKILL.md`.
+
+---
+
+## Command routing
+
+After scaffold, invoke internal workflows through the project entry skill
+(router-only):
+
+```text
+/<skillName> document
+/<skillName> review
+/<skillName> plan-to-blueprint
+```
+
+Chained intent in one message (agent resolves sequentially):
+
+```text
+/<skillName> document review changelog
+```
+
+**Fallback** when the agent does not parse subcommands: invoke `/<skillName>`
+and pass the subcommand in the prompt, e.g. *"Run subcommand `document` using
+the command routing in skills/my-backend/SKILL.md."*
 
 ---
 
@@ -136,6 +206,19 @@ actual workflows (deploy, test, migrate, etc).
 | `linear` | Creates Linear projects/issues via MCP | Multi-PR initiatives |
 | `mcp-linear-planner` | Preflight check + execution plan for Linear | When you need stricter control |
 | `mcp-linear-sync` | Executes planned Linear operations | After `planner` validates |
+| `plan-to-blueprint` | Converts a technical plan into project skills + manifests | After Plan mode or before multi-workflow implementation |
+
+### Plan → blueprint example
+
+```text
+/<my-backend> plan-to-blueprint
+
+Technical plan: [paste milestones, tasks, acceptance criteria, constraints]
+Project: my-backend, baseBranch: main, techStack: NestJS + PostgreSQL
+```
+
+Expected output: `skills/my-backend/SKILL.md`, `template.json`, workflow
+contracts under `workflows/`, and updated root doc links.
 
 ### Chained flow example (document → review → changelog)
 
@@ -189,6 +272,7 @@ agent runs). Workflow SKILL files are agent-facing contract definitions.
 - **`linear-mcp.md`** — operational guide for direct Linear workflow.
 - **`mcp-linear-sync.md`** — operational guide for the planner → sync
   decomposition.
+- **`plan-to-blueprint.md`** — operational guide for plan → skill scaffold.
 
 ---
 
