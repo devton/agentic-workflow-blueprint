@@ -200,6 +200,13 @@ actual workflows (deploy, test, migrate, etc).
 
 | Workflow | What it does | When to use |
 |----------|-------------|-------------|
+| `radioactive` | Full 11-phase development lifecycle workflow | End-to-end features, refactors, and quality-gated delivery |
+| `brainstorming` | Socratic discovery protocol & decision log | Requirement discovery & scope clarification |
+| `plan-writing` | Structured task breakdown with dependencies & verification | Pre-implementation task planning |
+| `ui-ux-pro-max` | Design system, palette, typography & responsive rules | Frontend UI/UX component design |
+| `thermo-nuclear-code-quality-review` | Strict code quality & maintainability review | Code audit & architectural verification |
+| `thermo-fix` | Automated review fix loop (up to 3×) with build check | Applying review findings & build verification |
+| `changelog-generator` | Customer-facing release notes from git commits | Generating user changelog |
 | `document` | Builds docs from git diff evidence | After implementation is done |
 | `review` | Validates docs with deterministic pass/fail | Auto-step after `document` |
 | `changelog` | Generates changelog from approved docs | After `review` passes |
