@@ -7,11 +7,11 @@ description: Blueprint workflow to scaffold agent-oriented documentation with pr
 
 ### Goal
 
-Provide a reusable blueprint workflow that scaffolds an "agentic workflows" documentation structure for any codebase, with progressive disclosure and executable contracts (workflows).
+Provide a reusable blueprint workflow that scaffolds an "agentic workflows" documentation structure for any codebase, with progressive disclosure, executable contracts (workflows), and self-contained interactive visual HTML manuals (`README.html` / `<filename>.html`).
 
 ### Scope
 
-- Applies to: any repository that wants an agent-oriented documentation system (orchestrator + workflow skills + references + runbooks).
+- Applies to: any repository that wants an agent-oriented documentation system (orchestrator + workflow skills + references + runbooks + visual HTML manuals).
 - Does not cover: implementing product features; this is scaffolding/documentation only.
 
 ### Triggers
@@ -20,6 +20,7 @@ Provide a reusable blueprint workflow that scaffolds an "agentic workflows" docu
 - "Set up skills folder + workflows"
 - "Make docs agent-friendly"
 - "Refactor AGENTS.md into linked skills"
+- "Generate HTML manuals for skills and runbooks"
 
 ### Inputs
 
@@ -27,44 +28,52 @@ Provide a reusable blueprint workflow that scaffolds an "agentic workflows" docu
 - `baseBranch`: default integration branch (e.g. `develop`, `main`)
 - `techStack`: short list (e.g. `NestJS + MikroORM + Graphile Worker`)
 - `existingRootDoc`: root instruction file path (`AGENTS.md`, `CLAUDE.md`, etc.)
-- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`, `plan-to-blueprint`)
+- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`, `html-manual`, `plan-to-blueprint`)
 - `constraints`: project hard rules (e.g. "no emojis", "mock external boundaries only")
 - `skillName` (optional): slash-invocation name for the project entry skill; defaults to `projectSlug` (lowercase, hyphens only)
 
 ### Outputs
 
-Creates a minimal, navigable structure:
+Creates a minimal, navigable structure with matching HTML visual manuals:
 
 ```
 skills/<projectSlug>/
   SKILL.md
+  README.html                       ← Interactive visual HTML manual for project skill
   template.json                     ← Declarative manifest (commands, entry)
   reference/
     routing-matrix.md
+    routing-matrix.html             ← Visual HTML version matching base filename
     role-contracts.md
+    role-contracts.html             ← Visual HTML version matching base filename
     hook-blueprint.md (optional)
+    hook-blueprint.html (optional)
   workflows/
     <workflowName>/
       SKILL.md
+      README.html                   ← Interactive visual HTML manual for workflow
       template.json (optional)      ← Per-workflow manifest when useful
 docs/runbooks/
   agent-role-system.md
+  agent-role-system.html           ← Visual HTML version matching runbook filename
   agent-role-hooks.md (optional)
+  agent-role-hooks.html (optional)
   plan-to-blueprint.md (when workflow included)
+  plan-to-blueprint.html (when workflow included)
 ```
 
 And updates the root doc (`AGENTS.md` or equivalent) to link to the new entrypoints.
 
-This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, and MCP integration patterns. Optional decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`) are also included.
+This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `html-manual`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, visual documentation generation, and MCP integration patterns. Optional decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`) are also included.
 
-It can also carry runbook examples under `runbooks/` to show operator-facing
-execution playbooks for those workflows.
+It can also carry runbook examples under `runbooks/` to show operator-facing execution playbooks for those workflows.
 
 ### Invariants (guardrails)
 
 - Progressive disclosure: root doc stays short; details live behind links.
 - Executable contracts: every workflow is written as a contract the agent can follow:
   - `Goal`, `Scope`, `Triggers`, `Inputs`, `Invariants`, `Procedure`, `Outputs`, `Review gate`, `References`.
+- Visual HTML Manuals (Default Behavior): Every skill, workflow contract, reference doc (`.md`), and runbook (`.md`) MUST have a corresponding self-contained interactive visual HTML document (`README.html` for skills/workflows, `<filename>.html` matching base name for references/runbooks) formatted with Tailwind CSS CDN, dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic styling, and method/status badges. The source `.md` file MUST link to its `.html` companion under `## References`.
 - No duplication: do not copy/paste long rules across files; link to the source of truth.
 - Consistency: workflow ids and file paths must match exactly across all references.
 - Minimal surface: only add the workflows actually requested.
@@ -142,19 +151,29 @@ For each workflow in `workflowsWanted`, create:
 
 Optionally, for each workflow, add `workflows/<workflowName>/template.json` when an external tool needs a standalone command descriptor; keep it minimal (`name`, `entry`, `parent`).
 
-#### 4) Wire everything into the root doc
+#### 4) Generate Visual HTML Manuals (Default Requirement)
+
+For every generated or updated markdown file:
+
+- **Skills & Workflows:** Generate `README.html` inside the skill/workflow folder (`skills/<projectSlug>/README.html` and `skills/<projectSlug>/workflows/<workflowName>/README.html`).
+- **References:** Generate `<filename>.html` in `skills/<projectSlug>/reference/` matching the markdown filename (e.g. `routing-matrix.md` ➔ `routing-matrix.html`, `role-contracts.md` ➔ `role-contracts.html`).
+- **Runbooks:** Generate `<filename>.html` in `docs/runbooks/` matching the markdown filename (e.g. `agent-role-system.md` ➔ `agent-role-system.html`).
+- Format each HTML file as a single, self-contained visual manual using Tailwind CSS via CDN (`<script src="https://cdn.tailwindcss.com"></script>`), dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic cards (`background: rgba(24, 24, 27, 0.65); backdrop-filter: blur(12px)`), method/status badges, and code snippets.
+- Update each source `.md` file to include a reference link to its `.html` companion under `## References` (e.g. `[Interactive HTML View](./README.html)` or `[Visual HTML Version](./routing-matrix.html)`).
+
+#### 5) Wire everything into the root doc
 
 Update `existingRootDoc` to include:
 
-- "Start here": link to `skills/<projectSlug>/SKILL.md`
+- "Start here": link to `skills/<projectSlug>/SKILL.md` and `skills/<projectSlug>/README.html`
 - Under "Skills" (or similar), list:
-  - the project skill
-  - internal workflow skills (links to the new workflow SKILL.md files)
-  - runbook links
+  - the project skill & visual manual link
+  - internal workflow skills & visual manual links
+  - runbook links & visual manual links
 
 Do not duplicate workflow contents in the root doc.
 
-#### 5) Optional: deprecate legacy skill locations (wrapper)
+#### 6) Optional: deprecate legacy skill locations (wrapper)
 
 If there are existing skills in other directories:
 
@@ -163,27 +182,31 @@ If there are existing skills in other directories:
   - "Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`"
 - Leave the rest as a deep dive reference
 
-#### 6) Consistency verification (required)
+#### 7) Consistency verification (required)
 
 Before declaring the scaffold done:
 
-- Verify every link path exists.
+- Verify every link path exists (`.md` and `.html`).
 - Verify workflow ids are consistent:
   - `projectSlug.workflow.*` matches the file it lives in.
 - Verify root doc points only to canonical locations.
 - Verify `template.json` `commands[].name` values exist under `workflows/` and appear in Command routing + `routing-matrix.md`.
 - Verify router-only behavior is documented in the project entry `SKILL.md` (no undocumented flat aliases).
+- Verify every `.md` file has a matching `.html` visual manual companion.
 
 ### Review gate (must pass)
 
 - Root doc remains minimal and only links out.
 - Each workflow has the full contract sections (Goal..References).
 - Constraints are explicit and testable (no vague "best practices").
+- Self-contained interactive HTML visual manuals (`README.html` for skills/workflows, `<filename>.html` for references/runbooks) are generated for all files.
+- Every source `.md` file links to its `.html` companion under `## References`.
 - No duplication between root, project skill, and workflows.
-- All links resolve.
+- All links resolve (`.md` and `.html`).
 - `template.json` is valid JSON and consistent with `workflowsWanted`.
 - Command routing resolves every listed subcommand to exactly one workflow contract.
 
 ### Notes
 
 - This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules), keep them in the project skill and link them from workflows.
+- Installable skill contract with frontmatter: see `SKILL.md` (`name: workflow-blueprint`).

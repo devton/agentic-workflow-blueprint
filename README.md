@@ -207,6 +207,7 @@ actual workflows (deploy, test, migrate, etc).
 | `remotion-video-motion` | Remotion video setup, component motion, Zod schemas & spring choreography | Programmatic video generation, UI motion demos & GIF exports |
 | `thermo-nuclear-code-quality-review` | Strict code quality & maintainability review | Code audit & architectural verification |
 | `thermo-fix` | Automated review fix loop (up to 3×) with build check | Applying review findings & build verification |
+| `html-manual` | Standalone single-file interactive visual HTML manual generator | Generating README.html & visual HTML docs for skills, runbooks, references |
 | `changelog-generator` | Customer-facing release notes from git commits | Generating user changelog |
 | `document` | Builds docs from git diff evidence | After implementation is done |
 | `review` | Validates docs with deterministic pass/fail | Auto-step after `document` |
