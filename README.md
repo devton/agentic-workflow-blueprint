@@ -204,6 +204,7 @@ actual workflows (deploy, test, migrate, etc).
 | `brainstorming` | Socratic discovery protocol & decision log | Requirement discovery & scope clarification |
 | `plan-writing` | Structured task breakdown with dependencies & verification | Pre-implementation task planning |
 | `ui-ux-pro-max` | Design system, palette, typography & responsive rules | Frontend UI/UX component design |
+| `remotion-video-motion` | Remotion video setup, component motion, Zod schemas & spring choreography | Programmatic video generation, UI motion demos & GIF exports |
 | `thermo-nuclear-code-quality-review` | Strict code quality & maintainability review | Code audit & architectural verification |
 | `thermo-fix` | Automated review fix loop (up to 3×) with build check | Applying review findings & build verification |
 | `changelog-generator` | Customer-facing release notes from git commits | Generating user changelog |

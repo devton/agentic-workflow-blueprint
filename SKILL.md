@@ -55,7 +55,7 @@ docs/runbooks/
 
 And updates the root doc (`AGENTS.md` or equivalent) to link to the new entrypoints.
 
-This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, and MCP integration patterns. Optional decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`) are also included.
+This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, and MCP integration patterns. Optional decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`) are also included.
 
 It can also carry runbook examples under `runbooks/` to show operator-facing
 execution playbooks for those workflows.
