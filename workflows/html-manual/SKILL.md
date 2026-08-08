@@ -17,8 +17,9 @@ Generate standalone, single-file interactive HTML visual manuals (`README.html` 
 ---
 
 ## Triggers
+- **Explicit Invocation ONLY**: This workflow MUST ONLY be executed when invoked explicitly by the user (e.g., "Generate HTML manual", "/html-manual"). It should never be run automatically.
 - "Generate HTML manual"
-- "Create README.html for skill"
+- "Create HTML documentation for skill"
 - "Build visual documentation"
 - "Generate HTML version of runbook or reference"
 - "/html-manual [target path]"
@@ -39,14 +40,15 @@ Generate standalone, single-file interactive HTML visual manuals (`README.html` 
 5. **Overview & Contextual Sub-Graph Open by Default (`<details open>`)**: The `Goal & System Overview` and `Contextual Dependency Sub-Graph` cards MUST open automatically (`<details open>`) when any manual is loaded so the user gets instant context. All other detail sections remain closed by default (`<details>`).
 6. **Flat Unnested Hierarchy (No Card Inside Card)**: Content inside sections (tables, code, lists) MUST render directly on the flat card background without adding extra nested card borders.
 7. **Recursive Sidebar File Tree Explorer**: Every page MUST include an interactive left sidebar file tree (`w-80 border-r border-gray-200 bg-white dark:bg-gray-900`) with collapsible folder nodes (`📁 reference/`, `📁 workflows/`) and file links (`📄 SKILL.md`). The folder containing the active file auto-expands (`open`) and the active document is highlighted.
-8. **Organic Skill Mesh Graph (`GRAPH.html`)**: The root skill directory MUST include a dedicated `GRAPH.html` page rendering a pure organic network mesh map based strictly on true direct markdown cross-links between skills (no artificial hub nodes, no subgraph boxes).
+8. **Organic Skill Mesh Graph (`GRAPH.html`)**: The `.html-manual/<nome-skill-principal>/` directory MUST include a dedicated `GRAPH.html` page rendering a pure organic network mesh map based strictly on true direct markdown cross-links between skills (no artificial hub nodes, no subgraph boxes).
 9. **Compact Horizontal Flow (`graph LR`) with Close-up Zoom & RankSpacing**: Diagrams MUST use a horizontal flow (`graph LR`) with reduced canvas height (`h-[600px]` for `GRAPH.html`, `h-[340px]` for sub-graphs), tight `rankSpacing`, close-up initial zoom (`zoom(1.25)` / `zoom(1.35)`), and `svg-pan-zoom` so nodes are projected forward smoothly without vertical waste.
 10. **Mermaid Diagram Sanitization**: Any ```mermaid block MUST have diacritics/accents removed from node labels/identifiers, and unquoted labels enclosed in double quotes (e.g. `node["Label Text"]`) to prevent syntax parsing errors.
 11. **Syntax Highlighting (Prism.js)**: Code blocks MUST use Prism.js for clean syntax highlighting across Ruby, TypeScript, JSON, Bash, and HTML.
 12. **Visual File Trees**: Folder/file tree outputs (`├──`, `└──`, paths) MUST be parsed into clean interactive file tree components with folder `📁` and file `📄` icons.
 13. **Exact Filename Convention**:
-   - For skill/workflow directories: Output filename MUST be `README.html` in the same folder as `SKILL.md`.
-   - For reference or runbook files (`<name>.md`): Output filename MUST be `<name>.html` matching the exact base name in the same folder (e.g., `routing-matrix.md` ➔ `routing-matrix.html`).
+   - Output HTML files MUST be placed in a `.html-manual/<nome-skill-principal>/` root directory, replicating the original source directory structure.
+   - For skill/workflow directories: Output filename MUST be `README.html` (e.g., `.html-manual/<nome-skill-principal>/workflows/html-manual/README.html`).
+   - For reference or runbook files (`<name>.md`): Output filename MUST be `<name>.html` matching the exact base name (e.g., `routing-matrix.md` ➔ `.html-manual/<nome-skill-principal>/reference/routing-matrix.html`).
 14. **Reference Link Back**: Every source `.md` file MUST link to its `.html` companion under `## References` (e.g. `[Interactive HTML View](./README.html)` or `[Visual HTML Version](./routing-matrix.html)`).
 
 ---
@@ -84,8 +86,8 @@ Generate standalone, single-file interactive HTML visual manuals (`README.html` 
 ---
 
 ## Outputs
-- Single-file `<filename>.html` or `README.html` saved alongside the source markdown file.
-- `GRAPH.html` in root skill directory with organic mesh map.
+- Single-file `<filename>.html` or `README.html` saved in the `.html-manual/<nome-skill-principal>/` directory, matching the source folder structure.
+- `GRAPH.html` in `.html-manual/<nome-skill-principal>/` with organic mesh map.
 - Updated source `.md` file with reference link.
 
 ---

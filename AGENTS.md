@@ -60,7 +60,7 @@ execution playbooks for those workflows.
 - Progressive disclosure: root doc stays short; details live behind links.
 - Executable contracts: every workflow is written as a contract the agent can follow:
   - `Goal`, `Scope`, `Triggers`, `Inputs`, `Invariants`, `Procedure`, `Outputs`, `Review gate`, `References`.
-- Visual HTML Manuals (Default Behavior): Every skill, workflow contract, reference doc (`.md`), and runbook (`.md`) MUST have a corresponding self-contained interactive visual HTML document (`README.html` for skills/workflows, `<filename>.html` matching base name for references/runbooks) formatted with Tailwind CSS CDN, dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic styling, and method/status badges. The source `.md` file MUST link to its `.html` companion under `## References`.
+- Visual HTML Manuals (Explicit Invocation): When requested, every skill, workflow contract, reference doc (`.md`), and runbook (`.md`) MUST have a corresponding self-contained interactive visual HTML document generated in the `.html-manual/<projectSlug>/` directory (`README.html` for skills/workflows, `<filename>.html` matching base name for references/runbooks). These are formatted with Tailwind CSS CDN, dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic styling, and method/status badges. The source `.md` file MUST link to its `.html` companion under `## References`.
 - No duplication: do not copy/paste long rules across files; link to the source of truth.
 - Consistency: workflow ids and file paths must match exactly across all references.
 - Minimal surface: only add the workflows actually requested.
@@ -138,13 +138,13 @@ For each workflow in `workflowsWanted`, create:
 
 Optionally, for each workflow, add `workflows/<workflowName>/template.json` when an external tool needs a standalone command descriptor; keep it minimal (`name`, `entry`, `parent`).
 
-#### 4) Generate Visual HTML Manuals (Default Requirement)
+#### 4) Generate Visual HTML Manuals (Explicit Action)
 
-For every generated or updated markdown file:
+When explicitly requested, generate visual manuals for markdown files replicating the folder structure inside `.html-manual/<projectSlug>/`:
 
-- **Skills & Workflows:** Generate `README.html` inside the skill/workflow folder (`skills/<projectSlug>/README.html` and `skills/<projectSlug>/workflows/<workflowName>/README.html`).
-- **References:** Generate `<filename>.html` in `skills/<projectSlug>/reference/` matching the markdown filename (e.g. `routing-matrix.md` ➔ `routing-matrix.html`, `role-contracts.md` ➔ `role-contracts.html`).
-- **Runbooks:** Generate `<filename>.html` in `docs/runbooks/` matching the markdown filename (e.g. `agent-role-system.md` ➔ `agent-role-system.html`).
+- **Skills & Workflows:** Generate `README.html` inside the replicated skill/workflow folder (e.g., `.html-manual/<projectSlug>/skills/<projectSlug>/README.html` and `.html-manual/<projectSlug>/skills/<projectSlug>/workflows/<workflowName>/README.html`).
+- **References:** Generate `<filename>.html` in `.html-manual/<projectSlug>/skills/<projectSlug>/reference/` matching the markdown filename.
+- **Runbooks:** Generate `<filename>.html` in `.html-manual/<projectSlug>/docs/runbooks/` matching the markdown filename.
 - Format each HTML file as a single, self-contained visual manual using Tailwind CSS via CDN (`<script src="https://cdn.tailwindcss.com"></script>`), dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic cards (`background: rgba(24, 24, 27, 0.65); backdrop-filter: blur(12px)`), method/status badges, and code snippets.
 - Update each source `.md` file to include a reference link to its `.html` companion under `## References` (e.g. `[Interactive HTML View](./README.html)` or `[Visual HTML Version](./routing-matrix.html)`).
 
@@ -186,7 +186,7 @@ Before declaring the scaffold done:
 - Root doc remains minimal and only links out.
 - Each workflow has the full contract sections (Goal..References).
 - Constraints are explicit and testable (no vague "best practices").
-- Self-contained interactive HTML visual manuals (`README.html` for skills/workflows, `<filename>.html` for references/runbooks) are generated for all files.
+- Self-contained interactive HTML visual manuals (`README.html` for skills/workflows, `<filename>.html` for references/runbooks) are generated in `.html-manual/<projectSlug>/` when explicitly requested.
 - Every source `.md` file links to its `.html` companion under `## References`.
 - No duplication between root, project skill, and workflows.
 - All links resolve (`.md` and `.html`).
