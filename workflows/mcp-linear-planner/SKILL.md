@@ -22,6 +22,9 @@ Linear operations.
 - `intent` (create project items, update statuses, organize milestones)
 - `projectContext` (optional ids/names already known)
 - `baseBranch` (optional, for linking implementation scope)
+- `changeWindow` (optional): allowed execution window for external-state writes
+- `riskClass` (optional): risk tag to drive stricter preflight behavior
+- `rollbackTicket` (optional): external rollback/change reference
 
 ### Invariants
 
@@ -29,6 +32,7 @@ Linear operations.
 - If server exposes `mcp_auth`, run auth before operational calls when needed.
 - Keep parameter names aligned with tool schema (no guessed fields).
 - Produce a written action plan before mutating external state.
+- If `riskClass` is `high`, include explicit hold point for operator approval before execution.
 
 ### Procedure
 
@@ -38,7 +42,8 @@ Linear operations.
 4. Build an operation plan:
   - ordered tool calls;
   - payload shape per call;
-  - idempotency/safety notes.
+  - idempotency/safety notes;
+  - operational metadata mapping (`changeWindow`, `riskClass`, `rollbackTicket`) when provided.
 5. Emit a plan artifact to be consumed by `mcp-linear-sync`.
 
 ### Outputs
@@ -52,9 +57,11 @@ Linear operations.
 - Tool schema was explicitly checked before planned calls.
 - Auth path is defined (or confirmed not required).
 - Plan has deterministic call order and parameter mapping.
+- High-risk plans include explicit human approval hold point.
 
 ### References
 
 - `../../SKILL.md`
 - `../mcp-linear-sync/SKILL.md`
+- [Interactive HTML View](./README.html)
 

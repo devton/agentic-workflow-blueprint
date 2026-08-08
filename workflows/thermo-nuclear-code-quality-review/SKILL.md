@@ -43,21 +43,21 @@ Perform an unusually strict review focused on implementation quality, maintainab
    - Elimination of ad-hoc conditionals or leaky abstractions.
    - Type contract and boundary cleanliness.
 3. Produce a **Severity-Ranked Finding Table**:
-   - 🔴 **Blocker**: Structural regressions, 1k+ line file growth, severe spaghetti.
-   - 🟠 **High**: Major maintainability or boundary issues.
-   - 🟡 **Medium**: Moderate cleanup or abstraction improvements.
-   - 🟢 **Low**: Informational nits.
-4. Output specific, actionable remedies for every 🔴 and 🟠 finding.
+   - **Blocker**: Structural regressions, 1k+ line file growth, severe spaghetti.
+   - **High**: Major maintainability or boundary issues.
+   - **Medium**: Moderate cleanup or abstraction improvements.
+   - **Low**: Informational nits.
+4. Output specific, actionable remedies for every Blocker and High finding.
 
 ### Outputs
 
 - Severity-ranked finding table appended to `walkthrough.md` or conversation output.
 - Final verdict: **APPROVED** or **FINDINGS REMAIN**.
 
-### Review Gate
+### Review gate
 
-- No unaddressed 🔴 (Blocker) findings.
-- No unaddressed 🟠 (High) findings.
+- No unaddressed Blocker findings.
+- No unaddressed High findings.
 - Implementation preserves architecture contracts.
 
 ### References
@@ -65,3 +65,4 @@ Perform an unusually strict review focused on implementation quality, maintainab
 - `../../SKILL.md`
 - `../thermo-fix/SKILL.md`
 - `../radioactive/SKILL.md`
+- [Interactive HTML View](./README.html)

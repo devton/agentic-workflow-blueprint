@@ -36,10 +36,10 @@ Run a thermo-nuclear code quality review on the diff, apply every identified fix
 ### Procedure
 
 1. **Identify Diff**: List all modified files.
-2. **Review**: Run `thermo-nuclear-code-quality-review` to produce finding table (🔴, 🟠, 🟡, 🟢).
-3. **Apply Fixes**: Fix findings top-down (🔴 → 🟠 → 🟡).
+2. **Review**: Run `thermo-nuclear-code-quality-review` to produce finding table (Blocker, High, Medium, Low).
+3. **Apply Fixes**: Fix findings top-down (Blocker -> High -> Medium).
 4. **Verify Build**: Run project build/check command. Fix build errors if any occur.
-5. **Re-review**: Re-inspect all changed files. Stop if zero 🔴 or 🟠 remain. Otherwise repeat up to `maxIterations`.
+5. **Re-review**: Re-inspect all changed files. Stop if zero Blocker or High findings remain. Otherwise repeat up to `maxIterations`.
 6. **Commit**: Create a local git commit with finding summary.
 
 ### Outputs
@@ -49,10 +49,10 @@ Run a thermo-nuclear code quality review on the diff, apply every identified fix
 - Updated `task.md` and `walkthrough.md`.
 - Local git commit.
 
-### Review Gate
+### Review gate
 
-- Zero 🔴 (Blocker) findings.
-- Zero 🟠 (High) findings.
+- Zero Blocker findings.
+- Zero High findings.
 - Project build/syntax checks pass.
 
 ### References
@@ -60,3 +60,4 @@ Run a thermo-nuclear code quality review on the diff, apply every identified fix
 - `../../SKILL.md`
 - `../thermo-nuclear-code-quality-review/SKILL.md`
 - `../radioactive/SKILL.md`
+- [Interactive HTML View](./README.html)

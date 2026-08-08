@@ -28,7 +28,7 @@ Analyze session git commits and generate user-facing release notes categorized b
 ### Invariants
 
 1. **User Perspective**: Write for end users, not backend implementation details.
-2. **Clear Categorization**: Group into Features ✨, Fixes 🐛, Improvements 🔧.
+2. **Clear Categorization**: Group into Features, Fixes, and Improvements.
 
 ### Procedure
 
@@ -41,7 +41,7 @@ Analyze session git commits and generate user-facing release notes categorized b
 
 - User-facing Changelog entry in `walkthrough.md`.
 
-### Review Gate
+### Review gate
 
 - Changelog reflects user-facing impact accurately.
 
@@ -50,3 +50,4 @@ Analyze session git commits and generate user-facing release notes categorized b
 - `../../SKILL.md`
 - `../radioactive/SKILL.md`
 - `../changelog/SKILL.md`
+- [Interactive HTML View](./README.html)

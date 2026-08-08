@@ -3,7 +3,7 @@ name: html-manual
 description: Standalone single-file interactive visual HTML manual generator for skills, workflows, reference docs, and runbooks using Tailwind CSS CDN, Light/Dark Mode theme switcher, recursive sidebar file tree, and organic Mermaid graph mesh.
 ---
 
-# "workflow.html-manual"
+## agentic-workflows-blueprint.workflow.html-manual
 
 ## Goal
 Generate standalone, single-file interactive HTML visual manuals (`README.html` for skills/workflows and `<filename>.html` for references/runbooks) that mirror markdown contracts using Tailwind CSS CDN, Light/Dark mode theme switcher (persisted via `sessionStorage`), recursive sidebar file tree explorer, and organic Mermaid graph network mesh for maximum human readability and navigation.
@@ -90,7 +90,7 @@ Generate standalone, single-file interactive HTML visual manuals (`README.html` 
 
 ---
 
-## Review Gate
+## Review gate
 - [ ] Output HTML is self-contained single file with Tailwind CSS CDN?
 - [ ] Theme toggle switches between Light and Dark mode and persists in `sessionStorage`?
 - [ ] Overview and Contextual Sub-Graph are open by default?

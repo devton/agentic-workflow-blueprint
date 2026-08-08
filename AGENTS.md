@@ -22,7 +22,7 @@ Provide a reusable blueprint workflow that scaffolds an "agentic workflows" docu
 - `baseBranch`: default integration branch (e.g. `develop`, `main`)
 - `techStack`: short list (e.g. `NestJS + MikroORM + Graphile Worker`)
 - `existingRootDoc`: root instruction file path (`AGENTS.md`, `CLAUDE.md`, etc.)
-- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`, `plan-to-blueprint`)
+- `workflowsWanted`: list of workflow ids to scaffold (e.g. `modules`, `specs`, `document`, `network-engineering`, `infra-operations`, `iac`, `os-platform`, `plan-to-blueprint`)
 - `constraints`: project hard rules (e.g. "no emojis", "mock external boundaries only")
 - `skillName` (optional): slash-invocation name for the project entry skill; defaults to `projectSlug` (lowercase, hyphens only)
 
@@ -50,7 +50,7 @@ docs/runbooks/
 
 And updates the root doc (`AGENTS.md` or equivalent) to link to the new entrypoints.
 
-This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `html-manual`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, visual documentation generation, and MCP integration patterns. Optional decomposition workflows (such as `mcp-linear-planner` and `mcp-linear-sync`) are also included.
+This blueprint folder carries bundled workflows (`radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `html-manual`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `mcp-linear-planner`, `mcp-linear-sync`, `network-engineering`, `infra-operations`, `iac`, `os-platform`, `implementing-devsecops-security-scanning`, `scanning-containers-with-trivy-in-cicd`, `scanning-docker-images-with-trivy`, `scanning-kubernetes-manifests-with-kubesec`, `implementing-network-policies-for-kubernetes`, `implementing-rbac-hardening-for-kubernetes`, `implementing-pod-security-admission-controller`, `securing-aws-iam-permissions`, `securing-container-registry-images`, `securing-kubernetes-on-cloud`, `triaging-vulnerabilities-with-ssvc-framework`, `performing-kubernetes-cis-benchmark-with-kube-bench`, `analyzing-kubernetes-audit-logs`, `securing-github-actions-workflows`, `performing-container-image-hardening`, `remediating-s3-bucket-misconfiguration`, `performing-container-security-scanning-with-trivy`, `performing-vulnerability-scanning-with-nessus`, `implementing-syslog-centralization-with-rsyslog`, `c4-architecture`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, plan-to-skill transformation, visual documentation generation, MCP integration patterns, and infrastructure operations coverage.
 
 It can also carry runbook examples under `runbooks/` to show operator-facing
 execution playbooks for those workflows.
@@ -195,5 +195,9 @@ Before declaring the scaffold done:
 
 ### Notes
 
-- This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules), keep them in the project skill and link them from workflows.
+- This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules, network policies, IaC standards, and OS baselines), keep them in the project skill and link them from workflows.
 - Installable skill contract with frontmatter: see `SKILL.md` (`name: workflow-blueprint`).
+
+### References
+
+- [Visual HTML Version](./AGENTS.html)

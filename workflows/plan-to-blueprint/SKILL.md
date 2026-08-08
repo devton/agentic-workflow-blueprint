@@ -26,6 +26,7 @@ Transform a technical plan into an executable project skill blueprint: entry ski
 - `technicalPlan`: structured plan (milestones, tasks, acceptance criteria, constraints)
 - `workflowsWanted`: workflow ids inferred from the plan (must include at least one)
 - `constraints`: project hard rules extracted from the plan
+- `operationalContext` (optional): environment tiers, maintenance window, rollback strategy, compliance boundaries
 
 ### Invariants
 
@@ -34,11 +35,13 @@ Transform a technical plan into an executable project skill blueprint: entry ski
 - Every workflow in `workflowsWanted` gets a full contract (Goal through References).
 - Do not invent scope not present in `technicalPlan`; mark gaps explicitly in handoff notes.
 - Workflow ids and folder names must match exactly (`kebab-case`).
+- For infra/network/IaC/OS plans, include explicit operational verification and rollback criteria in generated contracts.
 
 ### Procedure
 
 1. Parse `technicalPlan` and extract: objectives, milestones, deliverables, constraints, and candidate workflow boundaries.
 2. Propose `workflowsWanted` (confirm or refine with user if ambiguous).
+   - Include `network-engineering`, `infra-operations`, `iac`, and `os-platform` when the technical plan includes those domains.
 3. Scaffold `skills/<projectSlug>/SKILL.md` with orchestrator + **Command routing** (router-only).
 4. Generate `skills/<projectSlug>/template.json` with `commands[]` for each workflow in `workflowsWanted`.
 5. Create `reference/routing-matrix.md` and `reference/role-contracts.md` from plan evidence.
@@ -70,3 +73,4 @@ Transform a technical plan into an executable project skill blueprint: entry ski
 - `../../SKILL.md`
 - `../document/SKILL.md`
 - `../review/SKILL.md`
+- [Interactive HTML View](./README.html)

@@ -1,15 +1,15 @@
-# workflow-blueprint.workflow.remotion-video-motion
+## agentic-workflows-blueprint.workflow.remotion-video-motion
 
-## Goal
+### Goal
 
 Scaffold, configure, and animate React frontend components inside Remotion compositions for programmatic video creation, high-fidelity UI motion demos, micro-animations, and dynamic video rendering.
 
-## Scope
+### Scope
 
 - **Applies to**: Any React-based codebase (Next.js, Vite, Remotion CLI, Webpack, Rails React mounts, or standalone video packages).
 - **Agnostic & Abstract**: Designed to work independently of specific project paths or UI frameworks.
 
-## Triggers
+### Triggers
 
 - "remotion video"
 - "remotion motion animation"
@@ -18,13 +18,13 @@ Scaffold, configure, and animate React frontend components inside Remotion compo
 - "render remotion mp4/gif"
 - "ui video demo animation"
 
-## Inputs
+### Inputs
 
 - `TargetComponent`: The React frontend component to animate or showcase.
 - `CompositionConfig`: Resolution (`width`, `height`), frame rate (`fps`), total frames (`durationInFrames`), and default props.
 - `AnimationSpec`: Keyframe choreography, spring physics configs, and sequence timing.
 
-## Invariants (Strict Rules)
+### Invariants
 
 1. **Deterministic Frame Rendering**:
    - NEVER use non-deterministic sources like `Date.now()`, `Math.random()`, or unseeded random generators directly inside frame render loops.
@@ -45,7 +45,7 @@ Scaffold, configure, and animate React frontend components inside Remotion compo
 
 ---
 
-## Architecture & Workflow Phases
+### Architecture and workflow phases
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -72,7 +72,7 @@ Scaffold, configure, and animate React frontend components inside Remotion compo
 
 ---
 
-## Step-by-Step Execution Guide
+### Step-by-step execution guide
 
 ### Phase 1: Environment Detection & Setup
 
@@ -226,7 +226,7 @@ export const MotionShowcase: React.FC = () => {
 
 ---
 
-## Verification Criteria
+### Review gate
 
 - [ ] All Remotion dependencies resolution cleanly without version conflicts.
 - [ ] React UI components render in Remotion Studio without missing styles or unhandled runtime exceptions.
@@ -234,8 +234,9 @@ export const MotionShowcase: React.FC = () => {
 - [ ] Props are strongly typed with Zod schema (`myComponentSchema`).
 - [ ] Motion springs and interpolations execute smoothly at target FPS (30 or 60).
 
-## References
+### References
 
 - [Remotion Official Documentation](https://www.remotion.dev/docs)
 - [Remotion Motion Blur & Transitions](https://www.remotion.dev/docs/transitions)
 - [Workflow Blueprint SKILL](../../SKILL.md)
+- [Interactive HTML View](./README.html)

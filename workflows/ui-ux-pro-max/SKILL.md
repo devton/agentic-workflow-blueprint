@@ -43,7 +43,7 @@ Produce a visual design system, color palette, typography hierarchy, and respons
 
 - UX Design Specification Block in `walkthrough.md`.
 
-### Review Gate
+### Review gate
 
 - Palette, typography, and responsive rules defined.
 - Mobile-first breakpoints verified.
@@ -52,3 +52,4 @@ Produce a visual design system, color palette, typography hierarchy, and respons
 
 - `../../SKILL.md`
 - `../radioactive/SKILL.md`
+- [Interactive HTML View](./README.html)

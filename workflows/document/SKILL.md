@@ -30,11 +30,13 @@ Create or update project documentation from the implementation evidence
 - Keep facts aligned with diff and existing behavior.
 - Do not invent decisions or results not present in evidence.
 - If rerun from review feedback, address each reported issue explicitly.
+- For infra/network/IaC/OS changes, include operational evidence (commands executed, checks passed, rollback state).
 
 ### Procedure
 
 1. Inspect `diffScope` and collect relevant evidence.
 2. Draft/update `docTarget` with objective, context, behavior, and validation.
+   - For infrastructure docs, include: change window, impact surface, verification commands, and rollback instructions.
 3. If `reviewFeedback` exists, apply all required corrections.
 4. Produce a final documentation output ready for review.
 
@@ -54,3 +56,4 @@ Create or update project documentation from the implementation evidence
 - `../../SKILL.md`
 - `../review/SKILL.md`
 - `../changelog/SKILL.md`
+- [Interactive HTML View](./README.html)
