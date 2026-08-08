@@ -51,6 +51,7 @@ Provide a portable, end-to-end 11-phase development lifecycle workflow that enfo
 5. **Executable Blueprint Contract**: Phase 5 must scaffold a reusable workflow contract at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
 6. **Pass/Fail Quality Gate**: Phase 7 specs must pass 100%. Phase 9 fix loop must resolve all 🔴 (Blockers) and 🟠 (High) findings before declaration of completion.
 7. **Institutional Memory**: Phase 10 must capture newly discovered patterns into workflow contracts and update project documentation.
+8. **Operational Safety for Infra Tasks**: When the feature affects network, infrastructure, IaC, or OS baselines, execution must include explicit rollback, change window alignment, and post-change health validation.
 
 ---
 
@@ -109,12 +110,14 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 1. Execute tasks in `task.md` sequentially.
 2. Read files before editing; apply minimal, targeted edits.
 3. Track progress by marking `[/]` (in progress) and `[x]` (completed) in `task.md`.
+4. For infra-impacting tasks, execute pre-change checks and capture rollback checkpoints before mutating state.
 
 #### Phase 7 — TESTS
 
 1. Run the project's test runner (e.g. `rspec-rails`, `vitest`, `pytest`, or `testing-patterns`).
 2. Write unit/integration/system tests for all newly created or modified logic.
 3. Iterate until 100% of specs pass.
+4. For operational tasks, run infrastructure checks (connectivity, policy checks, service health, drift validation) and archive outputs.
 
 #### Phase 8 — REVIEW with Code Quality Engine
 
@@ -162,7 +165,7 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 
 ---
 
-### Review Gate
+### Review gate
 
 - [ ] Phase 1 project skill loaded or initialized via `/workflow-blueprint`.
 - [ ] Phase 2 discovery questions answered by user.
@@ -171,7 +174,7 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 - [ ] Phase 5 workflow contract created & registered in project routing matrix.
 - [ ] Phase 6 execution complete.
 - [ ] Phase 7 all test suites passing.
-- [ ] Phase 9 zero 🔴 or 🟠 findings remaining.
+- [ ] Phase 9 zero Blocker or High findings remaining.
 - [ ] Phase 10 skills/blueprints updated with new knowledge.
 - [ ] Phase 11 user-facing changelog generated.
 
@@ -183,3 +186,4 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 - `../plan-to-blueprint/SKILL.md`
 - `../review/SKILL.md`
 - `../changelog/SKILL.md`
+- [Interactive HTML View](./README.html)

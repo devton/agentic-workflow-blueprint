@@ -112,7 +112,7 @@ When you trigger this blueprint, the agent will ask:
 - **baseBranch** — main integration branch (e.g. `main`, `develop`)
 - **techStack** — what's the stack? (e.g. `NestJS + PostgreSQL + Redis`)
 - **workflowsWanted** — which workflows to scaffold
-  (e.g. `modules`, `specs`, `document`, `review`)
+  (e.g. `modules`, `specs`, `document`, `network-engineering`, `infra-operations`, `iac`, `os-platform`, `review`)
 - **constraints** — hard rules
   (e.g. "no ORM, raw SQL only", "all API calls go through service layer")
 
@@ -179,6 +179,8 @@ After scaffold, invoke internal workflows through the project entry skill
 /<skillName> document
 /<skillName> review
 /<skillName> plan-to-blueprint
+/<skillName> iac
+/<skillName> network-engineering
 ```
 
 Chained intent in one message (agent resolves sequentially):
@@ -215,6 +217,30 @@ actual workflows (deploy, test, migrate, etc).
 | `linear` | Creates Linear projects/issues via MCP | Multi-PR initiatives |
 | `mcp-linear-planner` | Preflight check + execution plan for Linear | When you need stricter control |
 | `mcp-linear-sync` | Executes planned Linear operations | After `planner` validates |
+| `network-engineering` | Captures network architecture and change controls | Topology changes, routing/firewall updates, connectivity validation |
+| `infra-operations` | Standardizes infrastructure operations workflow | Capacity changes, patch windows, rollback-ready infra updates |
+| `iac` | Governs Infrastructure as Code lifecycle | Terraform/OpenTofu plans, policy checks, drift handling |
+| `os-platform` | Defines operating system baseline and hardening workflow | Linux/Windows hardening, patching, service baseline enforcement |
+| `implementing-devsecops-security-scanning` | Builds full CI/CD security scanning with gates | When integrating Gitleaks, Semgrep, Trivy, SBOM, and optional ZAP |
+| `scanning-containers-with-trivy-in-cicd` | Adds Trivy security gates in CI/CD | Blocking container promotion on severity policy violations |
+| `scanning-docker-images-with-trivy` | Runs comprehensive Docker image scanning with Trivy | Image security checks, SBOM generation, and registry release validation |
+| `scanning-kubernetes-manifests-with-kubesec` | Scans Kubernetes manifests with Kubesec | Static manifest security validation before deployment |
+| `implementing-network-policies-for-kubernetes` | Enforces Kubernetes network microsegmentation | Default-deny policy rollout with explicit allow-list validation |
+| `implementing-rbac-hardening-for-kubernetes` | Hardens Kubernetes RBAC model | Least-privilege access and cluster-admin sprawl reduction |
+| `implementing-pod-security-admission-controller` | Rolls out Pod Security Admission safely | Namespace policy enforcement via audit/warn/enforce strategy |
+| `securing-aws-iam-permissions` | Hardens AWS IAM access posture | Least-privilege IAM, boundaries, key hygiene, and continuous monitoring |
+| `securing-container-registry-images` | Secures container artifact lifecycle in registries | Scan/sign/SBOM gates before image promotion |
+| `securing-kubernetes-on-cloud` | Hardens managed Kubernetes clusters on cloud | Provider-aware controls across identity, network, RBAC, admission, and runtime |
+| `triaging-vulnerabilities-with-ssvc-framework` | Prioritizes vulnerabilities with SSVC decision model | Converts CVE data into Act/Attend/Track outcomes with SLA mapping |
+| `performing-kubernetes-cis-benchmark-with-kube-bench` | Audits cluster posture against CIS benchmark | kube-bench assessment, remediation prioritization, and drift tracking |
+| `analyzing-kubernetes-audit-logs` | Detects threats from Kubernetes API audit events | Finds exec/secret/RBAC abuse patterns and produces SOC-ready detections |
+| `securing-github-actions-workflows` | Hardens GitHub Actions supply-chain security posture | Enforces SHA pinning, least-privilege tokens, and safe workflow execution |
+| `performing-container-image-hardening` | Hardens container images for production | Reduces attack surface with non-root, minimal base, and validation checks |
+| `remediating-s3-bucket-misconfiguration` | Remediates exposed or weak S3 bucket configurations | Closes public access, enforces encryption/logging, and adds preventive guardrails |
+| `performing-container-security-scanning-with-trivy` | Runs full-spectrum Trivy security scanning | Covers vuln/misconfig/secret/license scans and SBOM outputs |
+| `performing-vulnerability-scanning-with-nessus` | Performs authorized Nessus vulnerability assessments | Produces validated findings and remediation-priority reports |
+| `implementing-syslog-centralization-with-rsyslog` | Centralizes logs securely with rsyslog | Enforces TLS forwarding, resilient queues, and per-source routing |
+| `c4-architecture` | Generates C4 architecture documentation | Produces context/container/component/deployment Mermaid diagrams |
 | `plan-to-blueprint` | Converts a technical plan into project skills + manifests | After Plan mode or before multi-workflow implementation |
 
 ### Plan → blueprint example
@@ -282,6 +308,9 @@ agent runs). Workflow SKILL files are agent-facing contract definitions.
 - **`mcp-linear-sync.md`** — operational guide for the planner → sync
   decomposition.
 - **`plan-to-blueprint.md`** — operational guide for plan → skill scaffold.
+- **`network-change.md`** — operational guide for controlled network changes.
+- **`iac-delivery.md`** — operational guide for IaC plan/apply/policy flow.
+- **`os-hardening-patching.md`** — operational guide for OS hardening and patch windows.
 
 ---
 
@@ -296,3 +325,7 @@ agent runs). Workflow SKILL files are agent-facing contract definitions.
 Stack-agnostic by design. Stack-specific rules (ORM patterns, testing
 conventions, deployment quirks) go in the project skill and get linked
 from individual workflows.
+
+## References
+
+- [Visual HTML Version](./README.html)

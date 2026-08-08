@@ -28,17 +28,22 @@ criteria.
 - Review must be evidence-based and actionable.
 - Every failure must include concrete fix instructions.
 - Keep feedback concise and unambiguous.
+- For infra/network/IaC/OS docs, review must validate command evidence, operational safety notes, and rollback completeness.
 
 ### Procedure
 
 1. Validate documentation claims against `sourceEvidence`.
 2. Check structure clarity and required sections.
-3. Return one of:
+3. For infrastructure documentation, verify presence of:
+  - pre-change assumptions;
+  - post-change validation output;
+  - rollback readiness and known residual risks.
+4. Return one of:
   - `PASS`: no blocking issues;
   - `FAIL`: list exact issues and required fixes.
-4. If `FAIL` and `currentAttempt < maxDocumentRetries`, route back to
+5. If `FAIL` and `currentAttempt < maxDocumentRetries`, route back to
   `document` with feedback.
-5. If `FAIL` and retry limit reached, stop the chain and mark as unresolved.
+6. If `FAIL` and retry limit reached, stop the chain and mark as unresolved.
 
 ### Outputs
 
@@ -56,4 +61,5 @@ criteria.
 
 - `../../SKILL.md`
 - `../document/SKILL.md`
+- [Interactive HTML View](./README.html)
 
