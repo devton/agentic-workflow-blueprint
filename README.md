@@ -202,6 +202,13 @@ actual workflows (deploy, test, migrate, etc).
 
 | Workflow | What it does | When to use |
 |----------|-------------|-------------|
+| `embed-aihero-radioactive` | Full 14-phase development lifecycle embedding Matt Pocock / AI Hero skills | Deep discovery, domain modeling & quality-gated delivery |
+| `mattpocock/wayfinder` | Strategic codebase orientation & intent framing | Pre-discovery codebase mapping & entry point identification |
+| `mattpocock/grilling` | Socratic grilling & assumption interrogation protocol | Requirement clarification, trade-off & edge-case stress testing |
+| `mattpocock/domain-modeling` | Domain entity, aggregate, state transition & schema modeling | Core domain design & UUIDv7 schema specification |
+| `mattpocock/research` | Technical research spikes, API feasibility & benchmarking | Assessing technical risks & third-party dependencies |
+| `mattpocock/prototype` | Disposable proof-of-concept prototyping & visual spikes | Validating UI/UX or complex logic hypotheses before spec |
+| `mattpocock/to-spec` | Converts discovery, domain models & spikes into actionable specs | Synthesizing task.md execution plans from upstream evidence |
 | `radioactive` | Full 11-phase development lifecycle workflow | End-to-end features, refactors, and quality-gated delivery |
 | `brainstorming` | Socratic discovery protocol & decision log | Requirement discovery & scope clarification |
 | `plan-writing` | Structured task breakdown with dependencies & verification | Pre-implementation task planning |
