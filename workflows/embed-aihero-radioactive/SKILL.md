@@ -1,20 +1,20 @@
 ---
 name: embed-aihero-radioactive
 description: |
-  Full-cycle 14-phase development workflow blueprint embedding AI Hero skills (Wayfinder, Grilling, Domain Modeling, Research, Prototype, To-Spec) into Radioactive's quality-gated engineering pipeline.
+  Scaffold option & workflow blueprint that adapts a project's /radioactive development lifecycle by embedding Matt Pocock / AI Hero skills (wayfinder, grilling, domain-modeling, research, prototype, to-spec), starting with project skill classification followed by wayfinder orientation.
 ---
 
 ## agentic-workflows-blueprint.workflow.embed-aihero-radioactive
 
 ### Goal
 
-Provide a portable, end-to-end 14-phase development lifecycle workflow that embeds AI Hero's strategic orientation, Socratic grilling, domain modeling, technical research spikes, prototyping, and spec synthesis directly into Radioactive's quality-gated execution, review, fix, and changelog pipeline.
+Adapt and scaffold a project's `radioactive` workflow (`skills/<projectSlug>/workflows/radioactive/SKILL.md`) into a 14-phase development lifecycle that embeds Matt Pocock's skills (`mattpocock/wayfinder`, `mattpocock/grilling`, `mattpocock/domain-modeling`, `mattpocock/research`, `mattpocock/prototype`, `mattpocock/to-spec`), ensuring Phase 1 ALWAYS executes the primary project skill first before running `/wayfinder`.
 
 ---
 
 ### Scope
 
-- **Applies to**: Complex features, domain-driven refactors, mission-critical services, or cross-stack implementations (e.g. database + backend + API + UI) requiring deep discovery and robust architecture.
+- **Applies to**: Scaffolding or executing a project's `radioactive` workflow for complex features, domain-driven refactors, or cross-stack implementations requiring deep discovery, domain modeling, and quality-gated delivery.
 - **Does not cover**: Single-file trivial bug fixes, pure documentation edits (use `document`), or isolated test additions.
 
 ---
@@ -22,15 +22,15 @@ Provide a portable, end-to-end 14-phase development lifecycle workflow that embe
 ### Triggers
 
 - "Run embed-aihero-radioactive lifecycle"
+- "/radioactive [feature description]" (when scaffolded with AI Hero embedding)
 - "/embed-aihero-radioactive [feature description]"
-- "AI Hero radioactive feature cycle"
-- "Full-cycle AI Hero development"
+- "Adapt radioactive workflow with Matt Pocock skills"
 
 ---
 
 ### Inputs
 
-- `featureDescription`: Short text describing the feature or task (optional; if missing, triggers Phase 1 Wayfinder discovery).
+- `featureDescription`: Short text describing the feature or task (optional; if missing, triggers Phase 1 discovery).
 - `projectSlug`: Short identifier for the repo (e.g., `my-backend`, `apix`).
 - `baseBranch`: Target integration branch (default: `main` or `develop`).
 - `techStack`: Core stack details (e.g., `NestJS + MikroORM + PostgreSQL`, `Rails + React`).
@@ -43,11 +43,9 @@ Provide a portable, end-to-end 14-phase development lifecycle workflow that embe
 
 ### Invariants (Guardrails)
 
-1. **Sequential Phase Pipeline**: All 14 phases must execute in exact numerical order. No phase skipping.
-2. **UUIDv7 Primary Key Mandatory Rule**: Every entity primary key or unique resource identifier MUST use UUIDv7 for time-ordered sorting and distributed uniqueness.
-3. **Abstract Entrypoint Fallback**:
-   - **If a primary project skill exists** (e.g. `skills/<projectSlug>/SKILL.md` or `.agents/skills/<projectSlug>/SKILL.md` or `AGENTS.md`): Read it, classify request, and enforce project-specific hard rules and routing.
-   - **If NO primary project skill exists**: Trigger `/workflow-blueprint` init (or `plan-to-blueprint`) to scaffold baseline project context and routing before proceeding.
+1. **Phase 1 Execution Order**: Phase 1 MUST ALWAYS execute the primary project entry skill (`skills/<projectSlug>/SKILL.md` or `AGENTS.md`) FIRST to classify the request and extract hard rules, and THEN execute `/wayfinder` for codebase mapping and intent framing.
+2. **Sequential Phase Pipeline**: All 14 phases must execute in exact numerical order. No phase skipping.
+3. **UUIDv7 Primary Key Mandatory Rule**: Every entity primary key or unique resource identifier MUST use UUIDv7 for time-ordered sorting and distributed uniqueness.
 4. **Socratic Grilling Gate**: Phase 2 must present grilling questions and wait for explicit user response/confirmation before Phase 3 domain modeling.
 5. **Spec Approval Gate**: Phase 7 must generate a structured `task.md` specification and obtain explicit user approval before Phase 8/9 execution.
 6. **Executable Blueprint Contract**: Phase 8 must scaffold a reusable workflow contract at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
@@ -60,13 +58,13 @@ Provide a portable, end-to-end 14-phase development lifecycle workflow that embe
 ### Procedure
 
 ```
-Phase 1  — WAYFINDER & INIT    → /wayfinder (Orienting codebase, mapping context & entrypoints)
-Phase 2  — GRILLING            → /grilling (Deep Socratic interrogation & decision log)
-Phase 3  — DOMAIN MODELING     → /domain-modeling (Entities, UUIDv7 keys, state machines, invariants)
-Phase 4  — TECHNICAL RESEARCH  → /research (Technical spikes, dependency & API investigation)
-Phase 5  — PROTOTYPE / SPIKE   → /prototype (Conditional: POC validation for high-risk logic)
+Phase 1  — CLASSIFY & WAYFIND  → Project Skill FIRST ➔ /mattpocock/wayfinder
+Phase 2  — GRILLING            → /mattpocock/grilling (Deep Socratic interrogation & decision log)
+Phase 3  — DOMAIN MODELING     → /mattpocock/domain-modeling (Entities, UUIDv7 keys, state machines)
+Phase 4  — TECHNICAL RESEARCH  → /mattpocock/research (Technical spikes, dependency & API investigation)
+Phase 5  — PROTOTYPE / SPIKE   → /mattpocock/prototype (Conditional: POC validation for high-risk logic)
 Phase 6  — UX DESIGN           → /ui-ux-pro-max (Conditional: if UI involved)
-Phase 7  — TO-SPEC             → /to-spec (Synthesize findings into actionable task.md)
+Phase 7  — TO-SPEC             → /mattpocock/to-spec (Synthesize findings into actionable task.md)
 Phase 8  — BLUEPRINT CONTRACT  → /workflow-blueprint (Scaffold reusable feature contract)
 Phase 9  — EXECUTE             → Implement tasks sequentially with evidence-based edits
 Phase 10 — TESTS               → Run project specs/tests (100% pass required)
@@ -76,21 +74,27 @@ Phase 13 — BLUEPRINTS UPDATE   → /workflow-blueprint (Update skills & instit
 Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release notes)
 ```
 
-#### Phase 1 — WAYFINDER & INIT with /wayfinder
+#### Phase 1 — CLASSIFY & WAYFIND (Primary Project Skill ➔ /wayfinder)
 
-1. Load `wayfinder` skill to map codebase entry points, data flows, and subsystem boundaries.
-2. Search repository for relevant routes, controllers, schemas, database models, and existing test coverage.
-3. Identify existing patterns, architectural constraints, and critical unknowns.
-4. Generate `wayfinder.md` orientation brief.
+1. **Step 1: Primary Project Skill Classification**:
+   - Load the primary project entry skill (`skills/<projectSlug>/SKILL.md`, `.agents/skills/<projectSlug>/SKILL.md`, or `AGENTS.md`) **FIRST**.
+   - Classify the user request against the project's routing matrix and extract project-wide hard constraints, tech stack details, and domain boundaries.
+   - If NO primary project skill exists, trigger `/workflow-blueprint` init (or `plan-to-blueprint`) to scaffold baseline project context before proceeding.
+2. **Step 2: Codebase Orientation with `/wayfinder`**:
+   - Load the `wayfinder` skill (`skills/<projectSlug>/workflows/mattpocock/wayfinder/SKILL.md` or `workflows/mattpocock/wayfinder/SKILL.md`).
+   - Map codebase entry points, data flows, route handlers, models, and subsystem boundaries relevant to the classified request.
+   - Search repository for relevant controllers, schemas, database models, background jobs, and existing test coverage.
+   - Identify existing architectural patterns, legacy constraints, and critical unknowns to feed Phase 2 grilling.
+3. Output a 1-paragraph context summary combining the primary project skill rules and the `wayfinder.md` orientation brief.
 
-#### Phase 2 — GRILLING with /grilling
+#### Phase 2 — GRILLING with /mattpocock/grilling
 
-1. Load `grilling` skill and parse the `wayfinder.md` brief.
+1. Load `grilling` skill and parse the `wayfinder.md` brief and project rules.
 2. Formulate 3 to 7 strategic questions covering Scope, Edge Cases, Data Contracts (UUIDv7 keys), and Performance/Security rules.
 3. Present questions with trade-offs (Pros, Cons, Recommended Default).
 4. **Wait for explicit user response.** Do NOT proceed until user answers are recorded into a binding **Decision Log** (`decision-log.md`).
 
-#### Phase 3 — DOMAIN MODELING with /domain-modeling
+#### Phase 3 — DOMAIN MODELING with /mattpocock/domain-modeling
 
 1. Load `domain-modeling` skill and review `decision-log.md`.
 2. Define Aggregate Roots, Entities, Value Objects, and field types.
@@ -98,14 +102,14 @@ Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release
 4. Model state transitions (using Mermaid `stateDiagram-v2`) and entity relationships (using Mermaid `erDiagram`).
 5. Output `domain-model.md`.
 
-#### Phase 4 — TECHNICAL RESEARCH with /research
+#### Phase 4 — TECHNICAL RESEARCH with /mattpocock/research
 
 1. Load `research` skill to address technical unknowns or API contract dependencies.
 2. Execute temporary spikes in `scratch/` directory to measure performance or test library behavior.
 3. Evaluate third-party dependencies, security surface, and API constraints.
 4. Output `research-spike.md`.
 
-#### Phase 5 — PROTOTYPE / SPIKE with /prototype (Conditional)
+#### Phase 5 — PROTOTYPE / SPIKE with /mattpocock/prototype (Conditional)
 
 1. **Check condition**: Run if `needsPrototype` is true or if high-risk UI/algorithmic logic was identified.
 2. Load `prototype` skill to build a lightweight proof-of-concept (POC) spike.
@@ -119,7 +123,7 @@ Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release
 3. Generate design tokens (color palette, CSS variables, typography) and responsive layout rules (using mobile-first `min-*` breakpoints).
 4. Append UX design rules to `walkthrough.md`.
 
-#### Phase 7 — TO-SPEC with /to-spec
+#### Phase 7 — TO-SPEC with /mattpocock/to-spec
 
 1. Load `to-spec` skill and consolidate all upstream evidence (`wayfinder.md`, `decision-log.md`, `domain-model.md`, `research-spike.md`, `prototype-report.md`).
 2. Produce a structured `task.md` specification featuring executive context, UUIDv7 domain models, numbered task steps with target file paths, verification commands, and rollback playbooks.
@@ -181,22 +185,32 @@ Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release
 
 ---
 
+### Scaffolding Target Projects
+
+When `workflow-blueprint` scaffolds a project with `embed-aihero-radioactive`:
+1. It creates/adapts `skills/<projectSlug>/workflows/radioactive/SKILL.md` using this 14-phase embedded contract.
+2. It copies/scaffolds Matt Pocock's skills into `skills/<projectSlug>/workflows/mattpocock/` (`wayfinder`, `grilling`, `domain-modeling`, `research`, `prototype`, `to-spec`).
+3. It registers `radioactive` and `mattpocock/*` subcommands in `skills/<projectSlug>/template.json` and `reference/routing-matrix.md`.
+
+---
+
 ### Outputs
 
+- Adapted `skills/<projectSlug>/workflows/radioactive/SKILL.md` contract.
+- Scaffolded `skills/<projectSlug>/workflows/mattpocock/` skills.
 - `wayfinder.md`: Orientation brief.
 - `decision-log.md`: Grilling decision log.
 - `domain-model.md`: Domain entity & state machine specification (with UUIDv7 keys).
 - `research-spike.md` / `prototype-report.md` (when triggered).
 - `task.md`: Approved execution plan.
 - `walkthrough.md`: Decision log, UX specs, review tables, fix history, and user changelog.
-- `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`: Executable contract for the feature.
-- Updated project skills and routing matrix.
 - Clean git commit on local branch.
 
 ---
 
 ### Review gate
 
+- [ ] Primary project skill loaded FIRST in Phase 1 before running `/wayfinder`.
 - [ ] Phase 1 Wayfinder orientation brief (`wayfinder.md`) created.
 - [ ] Phase 2 Socratic grilling questions answered by user and recorded in `decision-log.md`.
 - [ ] Phase 3 Domain model defined with UUIDv7 primary keys and Mermaid state/ER diagrams.
