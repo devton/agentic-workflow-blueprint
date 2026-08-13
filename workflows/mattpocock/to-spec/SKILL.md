@@ -7,7 +7,9 @@ description: Specification synthesis protocol to transform wayfinder orientation
 
 ### Goal
 
-Synthesize orientation briefs, grilling decision logs, domain models, technical research spikes, and prototype learnings into a rigorous, unambiguous executable technical specification (`task.md` / `spec.md`).
+### Goal
+
+Synthesize orientation briefs, grilling decision logs, domain models, technical research spikes, and prototype learnings into a rigorous, unambiguous executable technical specification saved at `docs/tasks/task.<reference>.md`.
 
 ---
 
@@ -40,10 +42,10 @@ Synthesize orientation briefs, grilling decision logs, domain models, technical 
 
 ### Invariants (Guardrails)
 
-1. **Unambiguous Task Mapping**: Every task in `task.md` must specify exact target file paths, explicit dependencies, step-by-step code changes, and verification commands.
+1. **Unambiguous Task Mapping**: Every task in `docs/tasks/task.<reference>.md` must specify exact target file paths, explicit dependencies, step-by-step code changes, and verification commands.
 2. **Enforce UUIDv7 Identity Standards**: Ensure all data models, schemas, and resource IDs in the spec mandate UUIDv7 for time-ordered sorting.
-3. **Strict Phase Gating**: The generated specification (`task.md`) must obtain explicit user approval before execution (Phase 9 of embed-aihero-radioactive).
-4. **Operational & Rollback Criteria**: Include pre-change checks, rollback steps, and monitoring criteria for infrastructure or backend changes.
+3. **Strict Phase Gating**: The generated specification (`docs/tasks/task.<reference>.md`) must obtain explicit user approval before execution (Phase 9 of embed-aihero-radioactive).
+4. **Isolated Task File Path**: Save specifications under `docs/tasks/task.<reference>.md` to avoid cluttering root and prevent overwriting tasks from other sessions.
 
 ---
 
@@ -54,9 +56,9 @@ Synthesize orientation briefs, grilling decision logs, domain models, technical 
 1. Gather all upstream artifacts: `wayfinder.md`, `decision-log.md`, `domain-model.md`, `research-spike.md`, and `prototype-report.md`.
 2. Verify that all critical unknowns have been resolved and domain entities have UUIDv7 primary keys.
 
-#### 2) Structure Technical Specification (`task.md`)
+#### 2) Structure Technical Specification (`docs/tasks/task.<reference>.md`)
 
-Produce a structured `task.md` file formatted as follows:
+Produce a structured task specification file at `docs/tasks/task.<reference>.md` formatted as follows:
 
 ```markdown
 # Technical Specification & Execution Plan: <Feature Title>
@@ -98,14 +100,14 @@ Produce a structured `task.md` file formatted as follows:
 
 #### 4) Present Specification & Gate on User Approval
 
-1. Present `task.md` to the user.
+1. Present `docs/tasks/task.<reference>.md` to the user.
 2. **Gate on explicit user approval** before proceeding to Phase 8 (Blueprint Contract) and Phase 9 (Execute).
 
 ---
 
 ### Outputs
 
-- `task.md`: Comprehensive technical specification and execution breakdown ready for implementation.
+- `docs/tasks/task.<reference>.md`: Comprehensive technical specification and execution breakdown ready for implementation.
 
 ---
 

@@ -47,7 +47,7 @@ Adapt and scaffold a project's `radioactive` workflow (`skills/<projectSlug>/wor
 2. **Sequential Phase Pipeline**: All 14 phases must execute in exact numerical order. No phase skipping.
 3. **UUIDv7 Primary Key Mandatory Rule**: Every entity primary key or unique resource identifier MUST use UUIDv7 for time-ordered sorting and distributed uniqueness.
 4. **Socratic Grilling Gate**: Phase 2 must present grilling questions and wait for explicit user response/confirmation before Phase 3 domain modeling.
-5. **Spec Approval Gate**: Phase 7 must generate a structured `task.md` specification and obtain explicit user approval before Phase 8/9 execution.
+5. **Spec Approval Gate**: Phase 7 must generate a structured task specification at `docs/tasks/task.<reference>.md` and obtain explicit user approval before Phase 8/9 execution.
 6. **Executable Blueprint Contract**: Phase 8 must scaffold a reusable workflow contract at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
 7. **Pass/Fail Quality Gate**: Phase 10 specs must pass 100%. Phase 12 fix loop must resolve all 🔴 (Blockers) and 🟠 (High) findings before declaration of completion.
 8. **Institutional Memory**: Phase 13 must capture newly discovered patterns into workflow contracts and update project documentation.
@@ -64,7 +64,7 @@ Phase 3  — DOMAIN MODELING     → /mattpocock/domain-modeling (Entities, UUID
 Phase 4  — TECHNICAL RESEARCH  → /mattpocock/research (Technical spikes, dependency & API investigation)
 Phase 5  — PROTOTYPE / SPIKE   → /mattpocock/prototype (Conditional: POC validation for high-risk logic)
 Phase 6  — UX DESIGN           → /ui-ux-pro-max (Conditional: if UI involved)
-Phase 7  — TO-SPEC             → /mattpocock/to-spec (Synthesize findings into actionable task.md)
+Phase 7  — TO-SPEC             → /mattpocock/to-spec (Synthesize findings into docs/tasks/task.<reference>.md)
 Phase 8  — BLUEPRINT CONTRACT  → /workflow-blueprint (Scaffold reusable feature contract)
 Phase 9  — EXECUTE             → Implement tasks sequentially with evidence-based edits
 Phase 10 — TESTS               → Run project specs/tests (100% pass required)
@@ -126,20 +126,20 @@ Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release
 #### Phase 7 — TO-SPEC with /mattpocock/to-spec
 
 1. Load `to-spec` skill and consolidate all upstream evidence (`wayfinder.md`, `decision-log.md`, `domain-model.md`, `research-spike.md`, `prototype-report.md`).
-2. Produce a structured `task.md` specification featuring executive context, UUIDv7 domain models, numbered task steps with target file paths, verification commands, and rollback playbooks.
-3. Present `task.md` to user and **gate on explicit user approval**.
+2. Produce a structured task specification at `docs/tasks/task.<reference>.md` featuring executive context, UUIDv7 domain models, numbered task steps with target file paths, verification commands, and rollback playbooks.
+3. Present `docs/tasks/task.<reference>.md` to user and **gate on explicit user approval**.
 
 #### Phase 8 — BLUEPRINT CONTRACT with /workflow-blueprint
 
 1. Load `workflow-blueprint` (or `plan-to-blueprint`).
-2. Transform approved `task.md` into an executable workflow contract saved at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
+2. Transform approved task specification into an executable workflow contract saved at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
 3. Wire the new feature workflow into the project's routing matrix.
 
 #### Phase 9 — EXECUTE
 
-1. Execute tasks in `task.md` sequentially.
+1. Execute tasks in `docs/tasks/task.<reference>.md` sequentially.
 2. Read files before editing; apply minimal, targeted edits.
-3. Track progress by marking `[/]` (in progress) and `[x]` (completed) in `task.md`.
+3. Track progress by marking `[/]` (in progress) and `[x]` (completed) in `docs/tasks/task.<reference>.md`.
 4. For infra-impacting tasks, execute pre-change checks and capture rollback checkpoints before mutating state.
 
 #### Phase 10 — TESTS
@@ -166,7 +166,7 @@ Phase 14 — CHANGELOG           → /changelog-generator or /changelog (Release
    - Run build verification command (`bun run build`, `npm run test`, etc.).
    - Re-review modified files.
    - Stop loop early if zero 🔴 / 🟠 findings remain (verdict: APPROVED).
-2. Update `task.md` and `walkthrough.md` with final verdict.
+2. Update `docs/tasks/task.<reference>.md` and `walkthrough.md` with final verdict.
 3. Create a clean git commit on the local working branch.
 
 #### Phase 13 — BLUEPRINTS Update
@@ -202,7 +202,7 @@ When `workflow-blueprint` scaffolds a project with `embed-aihero-radioactive`:
 - `decision-log.md`: Grilling decision log.
 - `domain-model.md`: Domain entity & state machine specification (with UUIDv7 keys).
 - `research-spike.md` / `prototype-report.md` (when triggered).
-- `task.md`: Approved execution plan.
+- `docs/tasks/task.<reference>.md`: Approved execution plan.
 - `walkthrough.md`: Decision log, UX specs, review tables, fix history, and user changelog.
 - Clean git commit on local branch.
 
@@ -217,7 +217,7 @@ When `workflow-blueprint` scaffolds a project with `embed-aihero-radioactive`:
 - [ ] Phase 4 Technical research spike completed (if technical risks existed).
 - [ ] Phase 5 Prototype POC validated (if prototype requested).
 - [ ] Phase 6 UX design system generated (if UI feature).
-- [ ] Phase 7 Technical specification (`task.md`) approved by user.
+- [ ] Phase 7 Technical specification (`docs/tasks/task.<reference>.md`) approved by user.
 - [ ] Phase 8 Workflow contract created & registered in project routing matrix.
 - [ ] Phase 9 Sequential execution complete.
 - [ ] Phase 10 All test suites passing 100%.

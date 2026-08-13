@@ -47,7 +47,7 @@ Provide a portable, end-to-end 11-phase development lifecycle workflow that enfo
    - **If a primary project skill exists** (e.g. `skills/<projectSlug>/SKILL.md` or `.agents/skills/<projectSlug>/SKILL.md` or `AGENTS.md`): Read it, classify request, and enforce project-specific hard rules and routing.
    - **If NO primary project skill exists**: Trigger `/workflow-blueprint` init (or `plan-to-blueprint`) to scaffold baseline project context and routing before proceeding.
 3. **Socratic Discovery Gate**: Phase 2 must present discovery questions and wait for explicit user response/confirmation before Phase 3/4.
-4. **Plan Approval Gate**: Phase 4 must generate a structured `task.md` and obtain explicit user approval before Phase 5.
+4. **Plan Approval Gate**: Phase 4 must generate a structured task breakdown at `docs/tasks/task.<reference>.md` and obtain explicit user approval before Phase 5.
 5. **Executable Blueprint Contract**: Phase 5 must scaffold a reusable workflow contract at `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`.
 6. **Pass/Fail Quality Gate**: Phase 7 specs must pass 100%. Phase 9 fix loop must resolve all 🔴 (Blockers) and 🟠 (High) findings before declaration of completion.
 7. **Institutional Memory**: Phase 10 must capture newly discovered patterns into workflow contracts and update project documentation.
@@ -61,7 +61,7 @@ Provide a portable, end-to-end 11-phase development lifecycle workflow that enfo
 Phase 1  — CLASSIFY & INIT  → Project skill or /workflow-blueprint init
 Phase 2  — DISCOVER         → /brainstorming (Socratic questions & decision log)
 Phase 3  — UX DESIGN        → /ui-ux-pro-max or frontend-design (if UI involved)
-Phase 4  — PLAN             → /plan-writing (structured task breakdown in task.md)
+Phase 4  — PLAN             → /plan-writing (structured task breakdown in docs/tasks/task.<reference>.md)
 Phase 5  — BLUEPRINT        → /workflow-blueprint (scaffold feature contract)
 Phase 6  — EXECUTE          → Implement tasks sequentially with evidence-based edits
 Phase 7  — TESTS            → Project test runner (specs/tests for all changed code)
@@ -96,7 +96,7 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 #### Phase 4 — PLAN with /plan-writing
 
 1. Load `plan-writing` skill (or task planning methodology).
-2. Produce a structured `task.md` containing context, tasks with file targets, explicit dependencies, and verification criteria.
+2. Produce a structured task specification at `docs/tasks/task.<reference>.md` containing context, tasks with file targets, explicit dependencies, and verification criteria.
 3. Present plan to user and **gate on explicit approval**.
 
 #### Phase 5 — BLUEPRINT with /workflow-blueprint
@@ -107,9 +107,9 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 
 #### Phase 6 — EXECUTE
 
-1. Execute tasks in `task.md` sequentially.
+1. Execute tasks in `docs/tasks/task.<reference>.md` sequentially.
 2. Read files before editing; apply minimal, targeted edits.
-3. Track progress by marking `[/]` (in progress) and `[x]` (completed) in `task.md`.
+3. Track progress by marking `[/]` (in progress) and `[x]` (completed) in `docs/tasks/task.<reference>.md`.
 4. For infra-impacting tasks, execute pre-change checks and capture rollback checkpoints before mutating state.
 
 #### Phase 7 — TESTS
@@ -136,7 +136,7 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
    - Run build verification command (`bun run build`, `rails runner`, `npm run test`, etc.).
    - Re-review modified files.
    - Stop loop early if zero 🔴 / 🟠 findings remain (verdict: APPROVED).
-2. Update `task.md` and `walkthrough.md` with final verdict.
+2. Update `docs/tasks/task.<reference>.md` and `walkthrough.md` with final verdict.
 3. Create a clean git commit on the local working branch.
 
 #### Phase 10 — BLUEPRINTS Update
@@ -157,7 +157,7 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 
 ### Outputs
 
-- `task.md`: Executed task breakdown with completion status.
+- `docs/tasks/task.<reference>.md`: Executed task breakdown with completion status.
 - `walkthrough.md`: Decision log, UX specs, review tables, fix history, and user changelog.
 - `skills/<projectSlug>/workflows/<feature-slug>/SKILL.md`: Executable contract for the feature.
 - Updated project skills and routing matrix.

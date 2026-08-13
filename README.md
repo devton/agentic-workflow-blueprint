@@ -208,7 +208,7 @@ actual workflows (deploy, test, migrate, etc).
 | `mattpocock/domain-modeling` | Domain entity, aggregate, state transition & schema modeling | Core domain design & UUIDv7 schema specification |
 | `mattpocock/research` | Technical research spikes, API feasibility & benchmarking | Assessing technical risks & third-party dependencies |
 | `mattpocock/prototype` | Disposable proof-of-concept prototyping & visual spikes | Validating UI/UX or complex logic hypotheses before spec |
-| `mattpocock/to-spec` | Converts discovery, domain models & spikes into actionable specs | Synthesizing task.md execution plans from upstream evidence |
+| `mattpocock/to-spec` | Converts discovery, domain models & spikes into actionable specs | Synthesizing docs/tasks/task.<reference>.md execution plans from upstream evidence |
 | `radioactive` | Full 11-phase development lifecycle workflow | End-to-end features, refactors, and quality-gated delivery |
 | `brainstorming` | Socratic discovery protocol & decision log | Requirement discovery & scope clarification |
 | `plan-writing` | Structured task breakdown with dependencies & verification | Pre-implementation task planning |
