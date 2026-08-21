@@ -46,7 +46,7 @@ Run a thermo-nuclear code quality review on the diff, apply every identified fix
 
 - Resolved code findings.
 - Build verification pass.
-- Updated `task.md` and `walkthrough.md`.
+- Updated `docs/tasks/task.<reference>.md` and `walkthrough.md`.
 - Local git commit.
 
 ### Review gate

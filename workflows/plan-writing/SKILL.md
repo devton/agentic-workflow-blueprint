@@ -7,7 +7,7 @@ description: Generate structured implementation plans with task breakdowns, depe
 
 ### Goal
 
-Transform a decision log and feature requirements into a structured, dependency-mapped task breakdown saved as `task.md`.
+Transform a decision log and feature requirements into a structured, dependency-mapped task breakdown saved at `docs/tasks/task.<reference>.md`.
 
 ### Scope
 
@@ -31,6 +31,7 @@ Transform a decision log and feature requirements into a structured, dependency-
 2. **Dependency Mapping**: Clearly list task prerequisites.
 3. **Verification Criteria**: Include explicit check criteria for each task.
 4. **Operational Commands Required**: Infra/network/IaC/OS tasks must include concrete pre-check, apply/change, verification, and rollback commands.
+5. **Isolated Task File Path**: Save task breakdowns under `docs/tasks/task.<reference>.md` to avoid root clutter and session overwrites.
 
 ### Procedure
 
@@ -39,12 +40,12 @@ Transform a decision log and feature requirements into a structured, dependency-
 3. Specify dependencies and file paths.
 4. Add verification criteria (which tests/checks to run).
    - For infra tasks, include command-level verification (`terraform plan`, connectivity checks, service health checks, policy/security checks).
-5. Output plan to `task.md` artifact.
+5. Output plan to `docs/tasks/task.<reference>.md` artifact.
 6. Present plan to user for approval.
 
 ### Outputs
 
-- `task.md` artifact containing structured task list.
+- `docs/tasks/task.<reference>.md` artifact containing structured task list.
 
 ### Review gate
 
