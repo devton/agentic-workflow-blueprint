@@ -52,4 +52,3 @@ Produce a visual design system, color palette, typography hierarchy, and respons
 
 - `../../SKILL.md`
 - `../radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

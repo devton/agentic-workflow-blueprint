@@ -50,4 +50,3 @@ Generate a concise changelog entry after documentation review is approved.
 - `../../SKILL.md`
 - `../document/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

@@ -84,4 +84,3 @@ Identify and remediate S3 bucket misconfigurations that can expose data, then en
 - `../../SKILL.md`
 - `../securing-aws-iam-permissions/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

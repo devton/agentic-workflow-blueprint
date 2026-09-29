@@ -78,4 +78,3 @@ Analyze Kubernetes API audit logs to detect high-risk behaviors (privilege escal
 - `../../SKILL.md`
 - `../triaging-vulnerabilities-with-ssvc-framework/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

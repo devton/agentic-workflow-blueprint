@@ -97,4 +97,3 @@ Format each question with:
 - `../wayfinder/SKILL.md`
 - `../domain-modeling/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

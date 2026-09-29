@@ -57,6 +57,3 @@ Convert a technical plan into a durable, executable skill structure the agent ca
 - If manifest and routing-matrix disagree, fix manifest first, then re-run consistency verification.
 - If review gate fails after one correction pass, stop automation and request manual intervention.
 
-## References
-
-- [Visual HTML Version](./plan-to-blueprint.html)

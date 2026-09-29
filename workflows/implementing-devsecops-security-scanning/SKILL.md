@@ -110,4 +110,3 @@ Implement and operationalize a full DevSecOps security scanning pipeline that co
 - `../../SKILL.md`
 - `../review/SKILL.md`
 - `../document/SKILL.md`
-- [Interactive HTML View](./README.html)

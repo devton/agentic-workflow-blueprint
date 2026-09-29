@@ -82,4 +82,3 @@ Implement Kubernetes Pod Security Admission (PSA) with controlled policy rollout
 - `../../SKILL.md`
 - `../os-platform/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

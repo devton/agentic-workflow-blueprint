@@ -77,4 +77,3 @@ Produce clear, audience-appropriate architecture documentation using the C4 mode
 - `../../SKILL.md`
 - `../document/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

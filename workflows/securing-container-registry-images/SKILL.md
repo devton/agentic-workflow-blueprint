@@ -86,4 +86,3 @@ Secure container image registries by enforcing vulnerability scanning, image sig
 - `../../SKILL.md`
 - `../scanning-docker-images-with-trivy/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

@@ -91,4 +91,3 @@ Harden managed Kubernetes clusters on major cloud providers by enforcing pod sec
 - `../implementing-pod-security-admission-controller/SKILL.md`
 - `../implementing-network-policies-for-kubernetes/SKILL.md`
 - `../implementing-rbac-hardening-for-kubernetes/SKILL.md`
-- [Interactive HTML View](./README.html)

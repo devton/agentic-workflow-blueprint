@@ -50,4 +50,3 @@ Analyze session git commits and generate user-facing release notes categorized b
 - `../../SKILL.md`
 - `../radioactive/SKILL.md`
 - `../changelog/SKILL.md`
-- [Interactive HTML View](./README.html)

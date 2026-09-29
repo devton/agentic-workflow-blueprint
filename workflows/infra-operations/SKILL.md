@@ -60,4 +60,3 @@ Run infrastructure operations with controlled execution, operational evidence, a
 - `../../SKILL.md`
 - `../network-engineering/SKILL.md`
 - `../document/SKILL.md`
-- [Interactive HTML View](./README.html)

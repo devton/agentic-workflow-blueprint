@@ -61,4 +61,3 @@ Define and execute operating system baseline, hardening, and patching workflows 
 - `../../SKILL.md`
 - `../infra-operations/SKILL.md`
 - `../document/SKILL.md`
-- [Interactive HTML View](./README.html)

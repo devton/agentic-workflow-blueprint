@@ -56,4 +56,3 @@ Create or update project documentation from the implementation evidence
 - `../../SKILL.md`
 - `../review/SKILL.md`
 - `../changelog/SKILL.md`
-- [Interactive HTML View](./README.html)

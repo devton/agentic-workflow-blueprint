@@ -239,4 +239,3 @@ export const MotionShowcase: React.FC = () => {
 - [Remotion Official Documentation](https://www.remotion.dev/docs)
 - [Remotion Motion Blur & Transitions](https://www.remotion.dev/docs/transitions)
 - [Workflow Blueprint SKILL](../../SKILL.md)
-- [Interactive HTML View](./README.html)

@@ -98,4 +98,3 @@ Build rapid, lightweight proof-of-concept (POC) prototypes to validate complex u
 - `../research/SKILL.md`
 - `../to-spec/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

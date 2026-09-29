@@ -88,4 +88,3 @@ Implement Kubernetes NetworkPolicies that enforce zero-trust segmentation with d
 - `../../SKILL.md`
 - `../network-engineering/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

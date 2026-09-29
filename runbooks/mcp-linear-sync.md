@@ -45,7 +45,3 @@ Execute Linear updates through MCP with preflight checks and deterministic actio
 - Re-check schema and payload mapping before rerunning failed actions.
 - If auth/context is missing, resolve blocker first and rerun intake.
 
-## References
-
-- [Visual HTML Version](./mcp-linear-sync.html)
-

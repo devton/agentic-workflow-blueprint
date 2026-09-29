@@ -50,7 +50,7 @@ docs/runbooks/
 
 And updates the root doc (`AGENTS.md` or equivalent) to link to the new entrypoints.
 
-This blueprint folder carries bundled workflows (`embed-aihero-radioactive`, `mattpocock/wayfinder`, `mattpocock/grilling`, `mattpocock/domain-modeling`, `mattpocock/research`, `mattpocock/prototype`, `mattpocock/to-spec`, `radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `html-manual`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `mcp-linear-planner`, `mcp-linear-sync`, `network-engineering`, `infra-operations`, `iac`, `os-platform`, `implementing-devsecops-security-scanning`, `scanning-containers-with-trivy-in-cicd`, `scanning-docker-images-with-trivy`, `scanning-kubernetes-manifests-with-kubesec`, `implementing-network-policies-for-kubernetes`, `implementing-rbac-hardening-for-kubernetes`, `implementing-pod-security-admission-controller`, `securing-aws-iam-permissions`, `securing-container-registry-images`, `securing-kubernetes-on-cloud`, `triaging-vulnerabilities-with-ssvc-framework`, `performing-kubernetes-cis-benchmark-with-kube-bench`, `analyzing-kubernetes-audit-logs`, `securing-github-actions-workflows`, `performing-container-image-hardening`, `remediating-s3-bucket-misconfiguration`, `performing-container-security-scanning-with-trivy`, `performing-vulnerability-scanning-with-nessus`, `implementing-syslog-centralization-with-rsyslog`, `c4-architecture`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, Matt Pocock / AI Hero methodology embedding, plan-to-skill transformation, visual documentation generation, MCP integration patterns, and infrastructure operations coverage.
+This blueprint folder carries bundled workflows (`embed-aihero-radioactive`, `mattpocock/wayfinder`, `mattpocock/grilling`, `mattpocock/domain-modeling`, `mattpocock/research`, `mattpocock/prototype`, `mattpocock/to-spec`, `radioactive`, `brainstorming`, `plan-writing`, `ui-ux-pro-max`, `remotion-video-motion`, `thermo-nuclear-code-quality-review`, `thermo-fix`, `changelog-generator`, `document`, `review`, `changelog`, `linear`, `mcp-linear-planner`, `mcp-linear-sync`, `network-engineering`, `infra-operations`, `iac`, `os-platform`, `implementing-devsecops-security-scanning`, `scanning-containers-with-trivy-in-cicd`, `scanning-docker-images-with-trivy`, `scanning-kubernetes-manifests-with-kubesec`, `implementing-network-policies-for-kubernetes`, `implementing-rbac-hardening-for-kubernetes`, `implementing-pod-security-admission-controller`, `securing-aws-iam-permissions`, `securing-container-registry-images`, `securing-kubernetes-on-cloud`, `triaging-vulnerabilities-with-ssvc-framework`, `performing-kubernetes-cis-benchmark-with-kube-bench`, `analyzing-kubernetes-audit-logs`, `securing-github-actions-workflows`, `performing-container-image-hardening`, `remediating-s3-bucket-misconfiguration`, `performing-container-security-scanning-with-trivy`, `performing-vulnerability-scanning-with-nessus`, `implementing-syslog-centralization-with-rsyslog`, `c4-architecture`, `plan-to-blueprint`) to demonstrate full-lifecycle chained execution, Matt Pocock / AI Hero methodology embedding, plan-to-skill transformation, visual documentation generation, MCP integration patterns, and infrastructure operations coverage.
 
 It can also carry runbook examples under `runbooks/` to show operator-facing
 execution playbooks for those workflows.
@@ -60,7 +60,6 @@ execution playbooks for those workflows.
 - Progressive disclosure: root doc stays short; details live behind links.
 - Executable contracts: every workflow is written as a contract the agent can follow:
   - `Goal`, `Scope`, `Triggers`, `Inputs`, `Invariants`, `Procedure`, `Outputs`, `Review gate`, `References`.
-- Visual HTML Manuals (Explicit Invocation): When requested, every skill, workflow contract, reference doc (`.md`), and runbook (`.md`) MUST have a corresponding self-contained interactive visual HTML document generated in the `.html-manual/<projectSlug>/` directory (`README.html` for skills/workflows, `<filename>.html` matching base name for references/runbooks). These are formatted with Tailwind CSS CDN, dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic styling, and method/status badges. The source `.md` file MUST link to its `.html` companion under `## References`.
 - No duplication: do not copy/paste long rules across files; link to the source of truth.
 - Consistency: workflow ids and file paths must match exactly across all references.
 - Minimal surface: only add the workflows actually requested.
@@ -140,29 +139,19 @@ For each workflow in `workflowsWanted`, create:
 
 Optionally, for each workflow, add `workflows/<workflowName>/template.json` when an external tool needs a standalone command descriptor; keep it minimal (`name`, `entry`, `parent`).
 
-#### 4) Generate Visual HTML Manuals (Explicit Action)
-
-When explicitly requested, generate visual manuals for markdown files replicating the folder structure inside `.html-manual/<projectSlug>/`:
-
-- **Skills & Workflows:** Generate `README.html` inside the replicated skill/workflow folder (e.g., `.html-manual/<projectSlug>/skills/<projectSlug>/README.html` and `.html-manual/<projectSlug>/skills/<projectSlug>/workflows/<workflowName>/README.html`).
-- **References:** Generate `<filename>.html` in `.html-manual/<projectSlug>/skills/<projectSlug>/reference/` matching the markdown filename.
-- **Runbooks:** Generate `<filename>.html` in `.html-manual/<projectSlug>/docs/runbooks/` matching the markdown filename.
-- Format each HTML file as a single, self-contained visual manual using Tailwind CSS via CDN (`<script src="https://cdn.tailwindcss.com"></script>`), dark mode (`bg-zinc-950 text-zinc-100`), glassmorphic cards (`background: rgba(24, 24, 27, 0.65); backdrop-filter: blur(12px)`), method/status badges, and code snippets.
-- Update each source `.md` file to include a reference link to its `.html` companion under `## References` (e.g. `[Interactive HTML View](./README.html)` or `[Visual HTML Version](./routing-matrix.html)`).
-
-#### 5) Wire everything into the root doc
+#### 4) Wire everything into the root doc
 
 Update `existingRootDoc` to include:
 
-- "Start here": link to `skills/<projectSlug>/SKILL.md` and `skills/<projectSlug>/README.html`
+- "Start here": link to `skills/<projectSlug>/SKILL.md`
 - Under "Skills" (or similar), list:
-  - the project skill & visual manual link
-  - internal workflow skills & visual manual links
-  - runbook links & visual manual links
+  - the project skill link
+  - internal workflow skills links
+  - runbook links
 
 Do not duplicate workflow contents in the root doc.
 
-#### 6) Optional: deprecate legacy skill locations (wrapper)
+#### 5) Optional: deprecate legacy skill locations (wrapper)
 
 If there are existing skills in other directories:
 
@@ -171,27 +160,24 @@ If there are existing skills in other directories:
   - "Moved: canonical workflow is at `skills/<projectSlug>/workflows/...`"
 - Leave the rest as a deep dive reference
 
-#### 7) Consistency verification (required)
+#### 6) Consistency verification (required)
 
 Before declaring the scaffold done:
 
-- Verify every link path exists (`.md` and `.html`).
+- Verify every link path exists (`.md`).
 - Verify workflow ids are consistent:
   - `projectSlug.workflow.*` matches the file it lives in.
 - Verify root doc points only to canonical locations.
 - Verify `template.json` `commands[].name` values exist under `workflows/` and appear in Command routing + `routing-matrix.md`.
 - Verify router-only behavior is documented in the project entry `SKILL.md` (no undocumented flat aliases).
-- Verify every `.md` file has a matching `.html` visual manual companion.
 
 ### Review gate (must pass)
 
 - Root doc remains minimal and only links out.
 - Each workflow has the full contract sections (Goal..References).
 - Constraints are explicit and testable (no vague "best practices").
-- Self-contained interactive HTML visual manuals (`README.html` for skills/workflows, `<filename>.html` for references/runbooks) are generated in `.html-manual/<projectSlug>/` when explicitly requested.
-- Every source `.md` file links to its `.html` companion under `## References`.
 - No duplication between root, project skill, and workflows.
-- All links resolve (`.md` and `.html`).
+- All links resolve (`.md`).
 - `template.json` is valid JSON and consistent with `workflowsWanted`.
 - Command routing resolves every listed subcommand to exactly one workflow contract.
 
@@ -199,7 +185,3 @@ Before declaring the scaffold done:
 
 - This blueprint is intentionally stack-agnostic. For stack-specific rules (logging, ORM patterns, testing rules, network policies, IaC standards, and OS baselines), keep them in the project skill and link them from workflows.
 - Installable skill contract with frontmatter: see `SKILL.md` (`name: workflow-blueprint`).
-
-### References
-
-- [Visual HTML Version](./AGENTS.html)

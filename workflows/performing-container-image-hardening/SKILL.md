@@ -85,4 +85,3 @@ Harden container images by reducing attack surface, enforcing non-root and immut
 - `../../SKILL.md`
 - `../scanning-docker-images-with-trivy/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

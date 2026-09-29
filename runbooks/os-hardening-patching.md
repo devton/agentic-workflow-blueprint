@@ -40,6 +40,3 @@ Apply operating system hardening and patching with service safety checks and rec
 - Execute recovery plan before continuing.
 - Escalate through incident flow if recovery fails.
 
-## References
-
-- [Visual HTML Version](./os-hardening-patching.html)

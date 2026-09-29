@@ -57,4 +57,3 @@ Transform a decision log and feature requirements into a structured, dependency-
 - `../../SKILL.md`
 - `../brainstorming/SKILL.md`
 - `../radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

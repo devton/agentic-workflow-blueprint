@@ -56,5 +56,4 @@ implementation plan.
 - `../../SKILL.md`
 - `../mcp-linear-planner/SKILL.md`
 - `../mcp-linear-sync/SKILL.md`
-- [Interactive HTML View](./README.html)
 
