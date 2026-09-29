@@ -186,4 +186,3 @@ Phase 11 — CHANGELOG        → /changelog-generator or /changelog (user-facin
 - `../plan-to-blueprint/SKILL.md`
 - `../review/SKILL.md`
 - `../changelog/SKILL.md`
-- [Interactive HTML View](./README.html)

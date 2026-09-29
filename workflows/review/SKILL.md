@@ -61,5 +61,4 @@ criteria.
 
 - `../../SKILL.md`
 - `../document/SKILL.md`
-- [Interactive HTML View](./README.html)
 

@@ -40,6 +40,3 @@ Execute network changes with pre-checks, post-checks, and rollback controls that
 - Trigger rollback before starting additional changes.
 - Escalate to incident protocol if rollback fails.
 
-## References
-
-- [Visual HTML Version](./network-change.html)

@@ -79,4 +79,3 @@ Implement centralized syslog collection with rsyslog using encrypted transport, 
 - `../../SKILL.md`
 - `../infra-operations/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

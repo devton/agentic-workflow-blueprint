@@ -87,4 +87,3 @@ Harden GitHub Actions workflows against supply chain abuse, token misuse, and un
 - `../../SKILL.md`
 - `../implementing-devsecops-security-scanning/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

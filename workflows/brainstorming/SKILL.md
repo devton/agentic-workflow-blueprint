@@ -57,4 +57,3 @@ Uncover user requirements, trade-offs, scope boundaries, and edge cases through 
 - `../../SKILL.md`
 - `../radioactive/SKILL.md`
 - `../plan-writing/SKILL.md`
-- [Interactive HTML View](./README.html)

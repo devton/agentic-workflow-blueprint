@@ -63,5 +63,4 @@ Linear operations.
 
 - `../../SKILL.md`
 - `../mcp-linear-sync/SKILL.md`
-- [Interactive HTML View](./README.html)
 

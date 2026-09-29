@@ -93,4 +93,3 @@ Implement a CI/CD-native container scanning workflow using Trivy that blocks vul
 - `../../SKILL.md`
 - `../implementing-devsecops-security-scanning/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

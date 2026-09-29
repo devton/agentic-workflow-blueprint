@@ -61,4 +61,3 @@ Manage Infrastructure as Code changes through deterministic plan/apply validatio
 - `../../SKILL.md`
 - `../infra-operations/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

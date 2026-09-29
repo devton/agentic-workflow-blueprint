@@ -82,4 +82,3 @@ Perform comprehensive Docker image security assessment with Trivy, including vul
 - `../../SKILL.md`
 - `../scanning-containers-with-trivy-in-cicd/SKILL.md`
 - `../implementing-devsecops-security-scanning/SKILL.md`
-- [Interactive HTML View](./README.html)

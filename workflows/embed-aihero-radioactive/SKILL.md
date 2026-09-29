@@ -237,4 +237,3 @@ When `workflow-blueprint` scaffolds a project with `embed-aihero-radioactive`:
 - `../mattpocock/prototype/SKILL.md`
 - `../mattpocock/to-spec/SKILL.md`
 - `../radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

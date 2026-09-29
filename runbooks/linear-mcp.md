@@ -38,6 +38,3 @@ Execute Linear project management through a single workflow (`linear`) with clea
 - If auth fails, stop and resolve auth first.
 - If payload validation fails, correct mapping and rerun.
 
-## References
-
-- [Visual HTML Version](./linear-mcp.html)

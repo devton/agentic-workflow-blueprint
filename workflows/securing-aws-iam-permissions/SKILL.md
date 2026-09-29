@@ -87,4 +87,3 @@ Harden AWS IAM permissions with least-privilege controls, boundary guardrails, k
 - `../../SKILL.md`
 - `../iac/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

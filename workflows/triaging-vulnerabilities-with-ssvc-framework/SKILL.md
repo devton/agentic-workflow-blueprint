@@ -83,4 +83,3 @@ Prioritize vulnerability remediation using SSVC decision logic by combining expl
 - `../../SKILL.md`
 - `../review/SKILL.md`
 - `../changelog/SKILL.md`
-- [Interactive HTML View](./README.html)

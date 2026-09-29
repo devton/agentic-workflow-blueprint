@@ -65,4 +65,3 @@ Perform an unusually strict review focused on implementation quality, maintainab
 - `../../SKILL.md`
 - `../thermo-fix/SKILL.md`
 - `../radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

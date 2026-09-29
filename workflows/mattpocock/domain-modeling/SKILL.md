@@ -96,4 +96,3 @@ Formulate precise domain models, entity schemas, aggregate boundaries, state tra
 - `../research/SKILL.md`
 - `../to-spec/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

@@ -40,6 +40,3 @@ Deliver infrastructure changes through an auditable plan/apply process with poli
 - If apply fails, halt further changes and execute rollback plan.
 - If drift remains unresolved, create follow-up action before closure.
 
-## References
-
-- [Visual HTML Version](./iac-delivery.html)

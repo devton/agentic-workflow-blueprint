@@ -61,4 +61,3 @@ Execute a controlled synchronization in Linear using the prevalidated MCP plan.
 
 - `../../SKILL.md`
 - `../mcp-linear-planner/SKILL.md`
-- [Interactive HTML View](./README.html)

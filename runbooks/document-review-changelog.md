@@ -44,6 +44,3 @@ Execute a reliable documentation pipeline with bounded retries and clear handoff
 - If attempt 3 still fails, stop automation and request manual intervention.
 - Keep review findings attached to the handoff note.
 
-## References
-
-- [Visual HTML Version](./document-review-changelog.html)

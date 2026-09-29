@@ -60,4 +60,3 @@ Run a thermo-nuclear code quality review on the diff, apply every identified fix
 - `../../SKILL.md`
 - `../thermo-nuclear-code-quality-review/SKILL.md`
 - `../radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

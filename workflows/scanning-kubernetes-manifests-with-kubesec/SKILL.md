@@ -84,4 +84,3 @@ Assess Kubernetes manifests with Kubesec to detect insecure pod/workload configu
 - `../../SKILL.md`
 - `../implementing-network-policies-for-kubernetes/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

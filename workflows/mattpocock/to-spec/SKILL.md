@@ -127,4 +127,3 @@ Produce a structured task specification file at `docs/tasks/task.<reference>.md`
 - `../prototype/SKILL.md`
 - `../../plan-to-blueprint/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

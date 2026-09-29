@@ -78,4 +78,3 @@ Assess Kubernetes cluster security posture against CIS benchmark controls using 
 - `../../SKILL.md`
 - `../securing-kubernetes-on-cloud/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

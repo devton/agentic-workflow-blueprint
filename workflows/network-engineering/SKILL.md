@@ -61,4 +61,3 @@ Define and execute network engineering changes with explicit design evidence, va
 - `../../SKILL.md`
 - `../infra-operations/SKILL.md`
 - `../document/SKILL.md`
-- [Interactive HTML View](./README.html)

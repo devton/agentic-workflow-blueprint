@@ -97,4 +97,3 @@ Conduct evidence-driven technical research, dependency analysis, and isolated co
 - `../prototype/SKILL.md`
 - `../to-spec/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)

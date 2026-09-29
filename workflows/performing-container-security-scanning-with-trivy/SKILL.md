@@ -77,4 +77,3 @@ Run comprehensive Trivy-based container security scanning across images, filesys
 - `../../SKILL.md`
 - `../scanning-docker-images-with-trivy/SKILL.md`
 - `../scanning-containers-with-trivy-in-cicd/SKILL.md`
-- [Interactive HTML View](./README.html)

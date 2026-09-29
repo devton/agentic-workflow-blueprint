@@ -73,4 +73,3 @@ Transform a technical plan into an executable project skill blueprint: entry ski
 - `../../SKILL.md`
 - `../document/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

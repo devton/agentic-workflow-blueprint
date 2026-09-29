@@ -86,4 +86,3 @@ Harden Kubernetes RBAC by enforcing least privilege, reducing cluster-admin spra
 - `../../SKILL.md`
 - `../os-platform/SKILL.md`
 - `../review/SKILL.md`
-- [Interactive HTML View](./README.html)

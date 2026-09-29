@@ -98,4 +98,3 @@ Provide a structured codebase navigation and problem space orientation protocol 
 - `../../../SKILL.md`
 - `../grilling/SKILL.md`
 - `../../embed-aihero-radioactive/SKILL.md`
-- [Interactive HTML View](./README.html)
